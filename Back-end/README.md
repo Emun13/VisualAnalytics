@@ -1,2 +1,0 @@
-# VisualAnalytics
-Final Project 
