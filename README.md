@@ -1,2 +1,2 @@
-# VisualAnalytics
+# Visual Analytics
 Final Project 
