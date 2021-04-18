@@ -3,19 +3,391 @@
 <head>
 <title>Visual Analytics System</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <style>
 	body {
-        background-color: #fff;
-    }
+    background-color: #000;
+    font-family: Verdana, sans-serif;
+    color: #fff;
+    /*width: 100%;*/
+  }
+  .flexbox {
+    display: flex;
+    width: 100%;
+  }
+  .flexCol1 {
+    position: relative;
+    text-align: center;
+    width: 43%;
+    left: .5%;
+    padding-left: 1%;
+    color: #fff;
+  }
+  .flexCol2 {
+    position: relative;
+    text-align: center;
+    /*width: 50%;*/
+    color: #fff;
+  }
+	.map {
+  	width: 100%;
+	}
+  .grid {
+    width: 131.5%;
+    height: 120%;
+    padding-left: 5%;
+    position: relative;
+    top: 6%;
+  }
+	.key {
+		position: absolute;
+  	background-color: #f3f3f3;
+  	color: #000;
+  	font-weight: bold;
+  	text-align: right;
+  	bottom: 0%;
+  	left: -2%;
+  	width: 24%;
+  	height: 32.5%;
+		bottom: 1%;
+  	border-radius: 7%;
+  	font-size: .93vw;
+	}
+	.rectkey {
+		position: absolute;
+  	left: 0%;
+  	width: 8%;
+  	height: 4%;
+		bottom: 27%;
+		color: #fff;
+		font-size: 1vw;
+	}
+  .mapMarker {
+    position: absolute;
+    left: 29%;
+    width: 7%;
+    height: 3%;
+    bottom: 90%;
+    color: #fff;
+    font-size: 1vw;
+    font-weight: bold;
+    color: #000
+  }
+	.roadrunner {
+  	position: absolute;
+  	left: 32%;
+  	bottom: 17%;
+  	font-size: 1vw;
+	}
+	.kasios {
+  	position: absolute;
+  	left: 39%;
+  	bottom: 13%;
+  	font-size: 1vw;
+	}
+	.radiance {
+  	position: absolute;
+  	left: 50%;
+  	bottom: 4%;
+  	font-size: 1vw;
+	}
+	.indigo {
+  	position: absolute;
+  	left: 59%;
+ 		bottom: 6%;
+  	font-size: 1vw;
+	}
+	.triangle {
+		position: absolute;
+  	bottom: 17.5%;
+  	left: 47.5%;
+  	color: #0069ff;
+	}
+	.square {
+		position: absolute;
+  	background-color: rgba(255,0,106,.9);
+  	bottom: 17.5%;
+  	left: 47.5%;
+  	padding-left: .4%;
+  	padding-right: .4%;
+  	font-size: 1vw;
+  	color: #fff
+	}
+  /* Slider Stuff */
+  .switch {
+    position: absolute;
+    display: inline-block;
+    width: 13%;
+    height: 6.5%;
+    left: 83%; 
+    top: 10.5%;
+  }
+  .switch input { 
+    opacity: 0;
+    width: 0;
+    height: 0;
+  }
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #c94947;
+    transition: .4s;
+  }
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 76%;
+    width: 45%;
+    left: 6%;
+    bottom: 12%;
+    background-color: #fff;
+    transition: .4s;
+  }
+  input:checked + .slider {
+    background-color: #47c949;
+  }
+  input:checked + .slider:before {
+    transform: translateX(92%);
+  }
+  .scroll {
+    position: absolute;
+    left: 85%; 
+    top: 85%;
+    width: 43%;
+    height: 8%;
+    font-size: 2vw;
+    border-radius: 15px;
+    background-color: #51b7ff;
+    border: 3px solid #fff; /* Green */
+    text-align: center;
+    opacity: 1;
+    transition: 0.3s;
+    cursor: pointer;
+    color: #fff;
+    outline:none;
+  }
+  .scroll:hover {
+    background-color: #518cff;
+  }
+
+
 </style>
 </head>
 
 <body>
-	<div>Hello World</div>
+	<h1 style="text-align: center; font-size: 40px">Vast Challenge 2017: Mini Challenge 2</h1>
+	<h3 style="text-align: center;">By: Michelle Roitgarts, Janny Huang, & Mohammed Emun</h3>
+
+  <div class="flexbox">
+  	<div class="flexCol1" style="left: 2%; color: #00e9ff;">
+  		<img class="map" src="Map.jpg" alt="Map of Sanctuary">
+      <div>
+        <span class="mapMarker" id="Entrance0" style="background-color: #acdb80;">0</span>
+        <span class="mapMarker" id="Entrance1" style="background-color: #acdb80; bottom: 65%; left: 9%">1</span>
+        <span class="mapMarker" id="Entrance2" style="background-color: #acdb80; bottom: 56.5%; left: 83.5%">2</span>
+        <span class="mapMarker" id="Entrance3" style="background-color: #acdb80; bottom: 20.5%; left: 59.5%">3</span>
+        <span class="mapMarker" id="Entrance4" style="background-color: #acdb80; bottom: 11.3%; left: 64.5%">4</span>
+
+        <span class="mapMarker" id="GeneralGate0" style="background-color: #98e4d0; left: 50%; bottom: 91.5%">0</span>
+        <span class="mapMarker" id="GeneralGate3" style="background-color: #98e4d0; left: 83.5%; bottom: 70.5%">0</span>
+        <span class="mapMarker" id="GeneralGate1" style="background-color: #98e4d0; left: 28%; bottom: 84.5%">1</span>
+        <span class="mapMarker" id="GeneralGate2" style="background-color: #98e4d0; left: 48%; bottom: 81.5%">2</span>
+        <span class="mapMarker" id="GeneralGate4" style="background-color: #98e4d0; left: 31%; bottom: 51.2%">4</span>
+        <span class="mapMarker" id="GeneralGate5" style="background-color: #98e4d0; left: 56%; bottom: 45.5%">5</span>
+        <span class="mapMarker" id="GeneralGate6" style="background-color: #98e4d0; left: 61%; bottom: 34%">6</span>
+        <span class="mapMarker" id="GeneralGate7" style="background-color: #98e4d0; left: 30%; bottom: 30.5%">7</span>
+
+        <span class="mapMarker" id="RangerStop0" style="background-color: #ffff9b; left: 40%; bottom: 88.5%">0</span>
+        <span class="mapMarker" id="RangerStop1" style="background-color: #ffff9b; left: 9%; bottom: 85%">1</span>
+        <span class="mapMarker" id="RangerStop2" style="background-color: #ffff9b; left: 38%; bottom: 80%">2</span>
+        <span class="mapMarker" id="RangerStop3" style="background-color: #ffff9b; left: 67%; bottom: 75.5%">3</span>
+        <span class="mapMarker" id="RangerStop4" style="background-color: #ffff9b; left: 9%; bottom: 52.5%">4</span>
+        <span class="mapMarker" id="RangerStop5" style="background-color: #ffff9b; left: 68%; bottom: 42.5%">5</span>
+        <span class="mapMarker" id="RangerStop6" style="background-color: #ffff9b; left: 55%; bottom: 29.5%">6</span>
+
+        <span class="mapMarker" id="Camping0" style="background-color: #ffcb71; left: 24%; bottom: 78%">0</span>
+        <span class="mapMarker" id="Camping1" style="background-color: #ffcb71; left: 59.5%; bottom: 73%">1</span>
+        <span class="mapMarker" id="Camping2" style="background-color: #ffcb71; left: 21.8%; bottom: 67.5%">2</span>
+        <span class="mapMarker" id="Camping3" style="background-color: #ffcb71; left: 21.8%; bottom: 64%">3</span>
+        <span class="mapMarker" id="Camping4" style="background-color: #ffcb71; left: 23%; bottom: 55.4%">4</span>
+        <span class="mapMarker" id="Camping5" style="background-color: #ffcb71; left: 11%; bottom: 41%">5</span>
+        <span class="mapMarker" id="Camping6" style="background-color: #ffcb71; left: 68.5%; bottom: 16.5%">6</span>
+        <span class="mapMarker" id="Camping7" style="background-color: #ffcb71; left: 82.5%; bottom: 30%">7</span>
+        <span class="mapMarker" id="Camping8" style="background-color: #ffcb71; left: 83.5%; bottom: 74%">8</span>
+
+        <span class="mapMarker" id="Gate0" style="background-color: #fe7d6e; left: 30%; bottom: 81%">0</span>
+        <span class="mapMarker" id="Gate1" style="background-color: #fe7d6e; left: 30%; bottom: 76%">1</span>
+        <span class="mapMarker" id="Gate2" style="background-color: #fe7d6e; left: 14.5%; bottom: 71%">2</span>
+        <span class="mapMarker" id="Gate3" style="background-color: #fe7d6e; left: 69.5%; bottom: 68%">3</span>
+        <span class="mapMarker" id="Gate4" style="background-color: #fe7d6e; left: 75.5%; bottom: 44%">4</span>
+        <span class="mapMarker" id="Gate5" style="background-color: #fe7d6e; left: 62.5%; bottom: 29%">5</span>
+        <span class="mapMarker" id="Gate6" style="background-color: #fe7d6e; left: 54.5%; bottom: 26.5%">6</span>
+        <span class="mapMarker" id="Gate7" style="background-color: #fe7d6e; left: 50.5%; bottom: 22.5%">7</span>
+        <span class="mapMarker" id="Gate8" style="background-color: #fe7d6e; left: 65.3%; bottom: 14.2%">8</span>
+
+      </div>
+
+  		<span class="key">
+  			<p style="padding-top: 4%; padding-right: 12%">Entrance</p>
+  			<p style="padding-top: 1.5%; padding-right: 4%; font-size: .75vw">General Gate</p>
+  			<p style="padding-top: 4%; padding-right: 3%; font-size: .8vw">Ranger Stop</p>
+  			<p style="padding-top: 2.5%; padding-right: 12%">Camping</p>
+  			<p style="padding-top: 0.1%; padding-right: 32%">Gate</p>
+  			<p style="padding-top: 0%; padding-right: 21%">Sensor</p>
+  		</span>
+  		<span class="rectkey" style="background-color: #acdb80;"></span>
+  		<span class="rectkey" style="background-color: #98e4d0; bottom: 22%"></span>
+  		<span class="rectkey" style="background-color: #ffff9b; bottom: 17%"></span>
+  		<span class="rectkey" style="background-color: #ffcb71; bottom: 12%"></span>
+  		<span class="rectkey" style="background-color: #fe7d6e; bottom: 7%"></span>
+  		<span class="rectkey" style="background-color: rgba(255,0,106,.9); bottom: 3%; left: 2.5%; width: 3%; height: 3%">N</span>
+
+  		<div class="roadrunner">Roadrunner</div>
+  		<span class="triangle">&#9660</span>
+  		<div class="kasios">Kasios</div>
+  		<span class="triangle" style="bottom: 14.5%; left: 48%">&#9660</span>
+  		<div class="radiance">Radiance</div>
+  		<span class="triangle" style="bottom: 17%; left: 56%">&#9660</span>
+  		<div class="indigo">Indigo</div>
+  		<span class="triangle" style="bottom: 15.2%; left: 61%">&#9660</span>
+
+  		<span class="square" id="Sensor0" style="bottom: 13%; left: 33%">1</span>
+  		<span class="square" id="Sensor1" style="bottom: 20%; left: 36%">2</span>
+  		<span class="square" id="Sensor2" style="bottom: 23.5%; left: 41%">3</span>
+  		<span class="square" id="Sensor3" style="bottom: 25%; left: 46%">4</span>
+  		<span class="square" id="Sensor4" style="bottom: 24.5%; left: 53%">5</span>
+  		<span class="square" id="Sensor5" style="bottom: 14.5%; left: 52%">6</span>
+  		<span class="square" id="Sensor6" style="bottom: 7%; left: 45%">7</span>
+  		<span class="square" id="Sensor7" style="bottom: 8.5%; left: 38%">8</span>
+  		<span class="square" id="Sensor8" style="bottom: 24%; left: 61%">9</span>
+      <button type="button" id="scroll" class="scroll">Explore!</button>
+  	</div>
+
+    <!-- scrolls down to grid -->
+    <!-- <button type="button" id="scroll" class="scroll">Zoom In!</button> -->
+ 
+    <div class="flexCol2" style="left: 18%">
+      <div style="position: relative; font-size: 2.5vw; top: 5%;"><u>&nbsp Get a feel for the map! &nbsp </u></div>
+      
+      <span class="key" style="width: 90%; height: 75%; bottom: 6%; text-align: left;">
+
+        <p style="position: absolute; left: 40%; top: 6%; font-size: 1.5vw;">Entrance</p>
+          <label class="switch">
+            <input id="Entrance_Toggle" type="checkbox" checked onclick="toggle('Entrance_Toggle','Entrance', 4)">
+            <span class="slider"></span>
+          </label>
+        <p style="position: absolute; left: 40%; top: 21%; font-size: 1.5vw;">General Gate</p>
+          <label class="switch" style="top: 25.5%">
+            <input id="GeneralGate_Toggle" type="checkbox" checked onclick="toggle('GeneralGate_Toggle','GeneralGate', 7)">
+            <span class="slider"></span>
+          </label>
+        <p style="position: absolute; left: 40%; top: 36%; font-size: 1.5vw;">Ranger Stop</p>
+          <label class="switch" style="top: 40.5%">
+            <input id="RangerStop_Toggle" type="checkbox" checked onclick="toggle('RangerStop_Toggle','RangerStop', 6)">
+            <span class="slider"></span>
+          </label>
+        <p style="position: absolute; left: 40%; top: 51%; font-size: 1.5vw;">Camping</p>
+          <label class="switch" style="top: 55.5%">
+            <input id="Camping_Toggle" type="checkbox" checked onclick="toggle('Camping_Toggle','Camping', 8)">
+            <span class="slider"></span>
+          </label>
+        <p style="position: absolute; left: 40%; top: 66%; font-size: 1.5vw;">Gate</p>
+          <label class="switch" style="top: 70.5%">
+            <input id="Gate_Toggle" type="checkbox" checked onclick="toggle('Gate_Toggle','Gate', 8)">
+            <span class="slider"></span>
+          </label>
+        <p style="position: absolute; left: 40%; top: 81%; font-size: 1.5vw;">Sensor</p>
+          <label class="switch" style="top: 85.5%">
+            <input id="Sensor_Toggle" type="checkbox" checked onclick="toggle('Sensor_Toggle','Sensor', 8)">
+            <span class="slider"></span>
+          </label>
+        <span class="rectkey" style="left: 5%; width: 30%; height: 8%; border: 1px solid #000; background-color: #acdb80; bottom: 82%"></span>
+        <span class="rectkey" style="left: 5%; width: 30%; height: 8%; border: 1px solid #000; background-color: #98e4d0; bottom: 67%"></span>
+        <span class="rectkey" style="left: 5%; width: 30%; height: 8%; border: 1px solid #000; background-color: #ffff9b; bottom: 52%"></span>
+        <span class="rectkey" style="left: 5%; width: 30%; height: 8%; border: 1px solid #000; background-color: #ffcb71; bottom: 37%"></span>
+        <span class="rectkey" style="left: 5%; width: 30%; height: 8%; border: 1px solid #000; background-color: #fe7d6e; bottom: 22%"></span>
+
+        <span class="rectkey" style="left: 10%; width: 20%; height: 8%; border: 1px solid #000; background-color: rgba(255,0,106,.9); bottom: 7%; text-align: center;"><div style="position: relative; bottom: -25%">N</div></span>
+      </span>
+
+    </div>
+  </div>
+
+  <div class="flexbox">
+    <div class="flexCol1">
+      <img id="Grid1" class="grid" src="Grid.png" alt="Zoomed in Grid">
+      <span style="font-size: 1.2vw">
+        <span id="Xaxis" style="position: absolute; left: -6%; width: 150%; bottom: -35%; padding-bottom: 5%; word-spacing: .94vw;">
+          0 &nbsp 5 ...//... 60 65 70 75 80 85 90 95 100 105 110 115 120 125
+        </span>
+        <span id="Yaxis" style="text-align: center; width: 7%; height: 105%; position: absolute; left: 1.5%; bottom: -19.6%; padding-bottom: 5%;word-spacing: 1vw;line-height: 358%">
+          50 45 40 35 30 25 20 15 10 5
+        </span>
+
+        <!-- Buildings -->
+        <!-- Roadrunner Fitness Electronics: 89,27
+            Kasios Office Furniture: 90,21
+            Radiance ColourTek: 109,26
+            Indigo Sol Boards: 120,22
+        -->
+        <span class="triangle" id="RoadrunnerGrid" style="color: #00ef77; left: 71%; bottom: 33.5%">&#9660</span>
+        <span class="triangle" id="KasiosGrid" style="color: #ffff23; left: 73%; bottom: 21%">&#9660</span>
+        <span class="triangle" id="RadianceGrid" style="color: #ff3c3c; left: 101%; bottom: 32%">&#9660</span>
+        <span class="triangle" id="IndigoGrid" style="color: #3c9eff; left: 119%; bottom: 22.5%">&#9660</span>
+
+        <!-- Sensors -->
+        <span class="square" id="Sensor0" style="left: 36%; bottom: 21%;">1</span>
+        <span class="square" id="Sensor1" style="bottom: 51%; left: 41.5%">2</span>
+        <span class="square" id="Sensor2" style="left: 55%; bottom: 63%;">3</span>
+        <span class="square" id="Sensor3" style="left: 71%; bottom: 73%;">4</span>
+        <span class="square" id="Sensor4" style="left: 91%; bottom: 68%;">5</span>
+        <span class="square" id="Sensor5" style="left: 88%; bottom: 22.5%;">6</span>
+        <span class="square" id="Sensor6" style="left: 72%; bottom: -20%;">7</span>
+        <span class="square" id="Sensor7" style="left: 52%; bottom: -12%;">8</span>
+        <span class="square" id="Sensor8" style="left: 118%; bottom: 66%;">9</span>
+        <!-- 1:   62,21
+          2:  66,35
+          3:  76,41
+          4:  88,45
+          5:  103,43
+          6:  102,22
+          7:  89,3
+          8:  74,7
+          9:  119,42 
+         -->
+
+      </span>
+    </div>
+  </div>
 
 
 <script>
+
+  function toggle (toggle, name, count) {
+    var Toggle = document.getElementById(toggle);
+    if (Toggle.checked == true) {
+      for (var i = 0; i <= count; i++) {
+        document.getElementById(`${name}${i}`).style.visibility = 'visible'
+      }
+    }
+    else{
+      for (var i = 0; i <= count; i++) {
+        document.getElementById(`${name}${i}`).style.visibility = 'hidden'
+      }
+    }
+  }
+
+  $(".scroll").click(function() {
+    $('html,body').animate({
+        scrollTop: $("#Xaxis").offset().top},
+        1200);
+  });
+
 
 </script>
 
