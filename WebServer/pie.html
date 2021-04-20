@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Pie chart</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+ function loadJSON(callback, path) {   
+
+    var xobj = new XMLHttpRequest();
+    xobj.overrideMimeType("application/json");
+    xobj.open('GET', path, true); // Replace 'my_data' with the path to your file
+    xobj.onreadystatechange = function () {
+          if (xobj.readyState == 4 && xobj.status == "200") {
+            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
+            callback(xobj.responseText);
+          }
+    };
+    xobj.send(null);  
+ }
+
+    let meteor;
+    let sensor;
+    loadJSON((response) => {
+        meteor = JSON.parse(response);
+    }, 'meteor_index.json');
+
+    loadJSON((response) => {
+        sensor = JSON.parse(response);
+        console.log(sensor);
+    }, 'sensor_index.json');
+
+</script>
+</head>
+
+<body>
+
+<script>
+console.log(sensor);
+</script>
+</body>
+
+</html>
