@@ -4,6 +4,7 @@
 <title>Visual Analytics System</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="./data.js"></script>
 
 <style>
 	body {
@@ -538,7 +539,11 @@
   </div>
 <!-- To find the angles, subtract by 180...EX. wind blowing at 90 = 90 - 180, depending on the sensor -->
 
+
 <script>
+  // EXAMPLE OF HOW TO USE THE JSON OBJECTs
+  // This file links the data.js file in the webserver folder
+  // alert(JSON.stringify(METOR_DATA));
 
   function toggle (toggle, name, count) {
     var Toggle = document.getElementById(toggle);
