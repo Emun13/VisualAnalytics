@@ -210,6 +210,48 @@
     stroke: blue;
     right: 30%;
   }
+
+
+.dropbtn {
+  background-color: #007ee6;
+  color: #fff;
+  font-size: 1vw;
+  border: none;
+  width: 80%;
+  border-radius: 3px;
+  cursor: pointer;
+  margin-bottom: 6%;
+  position: relative;
+}
+.dropbtn:hover, .dropbtn:focus {
+  background-color: rgba(0,126,230, .7);
+}
+.dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f1f1f1;
+  overflow: auto;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: #000;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown a:hover {background-color: #ddd;}
+
+.show {display: block;}
+
+
 </style>
 </head>
 
@@ -312,32 +354,32 @@
 
         <p style="position: absolute; left: 40%; top: 6%; font-size: 1.5vw;">Entrance</p>
           <label class="switch">
-            <input id="Entrance_Toggle" type="checkbox" checked onclick="toggle('Entrance_Toggle','Entrance', 4)">
+            <input id="Entrance_Toggle" type="checkbox" checked onclick="toggleMap('Entrance_Toggle','Entrance', 4)">
             <span class="slider"></span>
           </label>
         <p style="position: absolute; left: 40%; top: 21%; font-size: 1.5vw;">General Gate</p>
           <label class="switch" style="top: 25.5%">
-            <input id="GeneralGate_Toggle" type="checkbox" checked onclick="toggle('GeneralGate_Toggle','GeneralGate', 7)">
+            <input id="GeneralGate_Toggle" type="checkbox" checked onclick="toggleMap('GeneralGate_Toggle','GeneralGate', 7)">
             <span class="slider"></span>
           </label>
         <p style="position: absolute; left: 40%; top: 36%; font-size: 1.5vw;">Ranger Stop</p>
           <label class="switch" style="top: 40.5%">
-            <input id="RangerStop_Toggle" type="checkbox" checked onclick="toggle('RangerStop_Toggle','RangerStop', 6)">
+            <input id="RangerStop_Toggle" type="checkbox" checked onclick="toggleMap('RangerStop_Toggle','RangerStop', 6)">
             <span class="slider"></span>
           </label>
         <p style="position: absolute; left: 40%; top: 51%; font-size: 1.5vw;">Camping</p>
           <label class="switch" style="top: 55.5%">
-            <input id="Camping_Toggle" type="checkbox" checked onclick="toggle('Camping_Toggle','Camping', 8)">
+            <input id="Camping_Toggle" type="checkbox" checked onclick="toggleMap('Camping_Toggle','Camping', 8)">
             <span class="slider"></span>
           </label>
         <p style="position: absolute; left: 40%; top: 66%; font-size: 1.5vw;">Gate</p>
           <label class="switch" style="top: 70.5%">
-            <input id="Gate_Toggle" type="checkbox" checked onclick="toggle('Gate_Toggle','Gate', 8)">
+            <input id="Gate_Toggle" type="checkbox" checked onclick="toggleMap('Gate_Toggle','Gate', 8)">
             <span class="slider"></span>
           </label>
         <p style="position: absolute; left: 40%; top: 81%; font-size: 1.5vw;">Sensor</p>
           <label class="switch" style="top: 85.5%">
-            <input id="Sensor_Toggle" type="checkbox" checked onclick="toggle('Sensor_Toggle','Sensor', 8)">
+            <input id="Sensor_Toggle" type="checkbox" checked onclick="toggleMap('Sensor_Toggle','Sensor', 8)">
             <span class="slider"></span>
           </label>
         <span class="rectkey" style="left: 5%; width: 30%; height: 8%; border: 1px solid #000; background-color: #acdb80; bottom: 82%"></span>
@@ -530,9 +572,41 @@
       
     </div> -->
     <div class="flexCol2" style="left: 43%;">
-      <div style="position: relative; font-size: 1vw; top: 3%; color: black; background-color: rgba(255,255,255, 1);text-align: center; width: 120%; height: 125%; border: 3px solid #00daff; border-radius: 10px">
-        <h3><u>&nbsp Toggle Data &nbsp</u></h3>
-       
+      <div style="position: relative; font-size: 1vw; top: 3%; color: black; background-color: rgba(255,255,255, 1);text-align: center; width: 105%; height: 125%; border: 3px solid #00daff; border-radius: 10px;">
+        <h2><u>&nbsp Toggle All &nbsp</u></h2>
+
+        <p>other stuff here</p>
+
+        <h4><u>&nbsp Toggle Grid &nbsp</u></h4>
+        <div style="display: flex; flex-direction: column;">
+          <div class="dropdown">
+            <button onclick="show_dropdown('chemicalDropdown')" class="dropbtn">Chemical &#9660</button>
+            <div id="chemicalDropdown" class="dropdown-content" style="right: 7%;">
+              <a href="#home">AGOC-3A</a>
+              <a href="#about">Appluimonia</a>
+              <a href="#contact">Chlorodinine</a>
+              <a href="#other">Methylosmolene</a>
+            </div>
+          </div>
+
+          <div class="dropdown">
+            <button onclick="show_dropdown('monthDropdown')" class="dropbtn">Month &#9660</button>
+            <div id="monthDropdown" class="dropdown-content" style="right: 20%;">
+              <a href="#home">April</a>
+              <a href="#about">August</a>
+              <a href="#contact">December</a>
+            </div>
+          </div>
+        </div>
+
+        <h4><u>&nbsp Toggle Pie Chart &nbsp</u></h4>
+
+        <p>other stuff here</p>
+
+        <h4><u>&nbsp Toggle Bar Graph &nbsp</u></h4>
+        
+        <p>other stuff here</p>
+
       </div>
       
     </div>
@@ -545,7 +619,7 @@
   // This file links the data.js file in the webserver folder
   // alert(JSON.stringify(METOR_DATA));
 
-  function toggle (toggle, name, count) {
+  function toggleMap (toggle, name, count) {
     var Toggle = document.getElementById(toggle);
     if (Toggle.checked == true) {
       for (var i = 0; i <= count; i++) {
@@ -564,6 +638,28 @@
         scrollTop: $("#Yaxis").offset().top},
         1200);
   });
+
+/* When the user clicks on the button, 
+toggle between hiding and showing the dropdown content */
+function show_dropdown(name) {
+  document.getElementById(name).classList.toggle("show");
+}
+
+// Close the dropdown if the user clicks outside of it
+window.onclick = function(event) {
+  if (!event.target.matches('.dropbtn')) {
+    var dropdowns = document.getElementsByClassName("dropdown-content");
+    var i;
+    for (i = 0; i < dropdowns.length; i++) {
+      var openDropdown = dropdowns[i];
+      if (openDropdown.classList.contains('show')) {
+        openDropdown.classList.remove('show');
+      }
+    }
+  }
+}
+
+
 </script>
 
 
