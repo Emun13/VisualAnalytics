@@ -212,7 +212,7 @@
   }
 
 
-.dropbtn {
+/*.dropbtn {
   background-color: #007ee6;
   color: #fff;
   font-size: 1vw;
@@ -230,7 +230,6 @@
   position: relative;
   display: inline-block;
 }
-
 .dropdown-content {
   display: none;
   position: absolute;
@@ -239,18 +238,90 @@
   box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
   z-index: 1;
 }
-
 .dropdown-content a {
   color: #000;
   padding: 12px 16px;
   text-decoration: none;
   display: block;
 }
-
 .dropdown a:hover {background-color: #ddd;}
+.show {display: block;}*/
 
-.show {display: block;}
 
+
+
+.dropdown-check-list {
+  display: inline-block;
+  border: none;
+  width: 92%; 
+  position: relative;
+  left: 4.5%;
+  top: -8px;
+  font-size: 1vw;
+}
+
+.dropdown-check-list .anchor {
+  position: relative;
+  cursor: pointer;
+  display: inline-block;
+  background-color: #007ee6;
+  padding: 5px 30px 5px 5px;
+  border-radius: 3px;
+  color: #fff;
+  border: none;
+  /*border: 1px solid #ccc;*/
+}
+.dropdown-check-list .anchor:hover {
+  background-color: rgba(0,126,230, .7);
+}
+
+.dropdown-check-list .anchor:after {
+  position: absolute;
+  content: "";
+  border-left: 2px solid #fff;
+  border-top: 2px solid #fff;
+  padding: 5px;
+  right: 10px;
+  top: 20%;
+  transform: rotate(-135deg);
+}
+
+.dropdown-check-list .anchor:active:after {
+  right: 8px;
+  top: 21%;
+}
+
+.dropdown-check-list ul.items {
+  /*padding: 2px;*/
+  display: none;
+  margin: 0;
+  width: 93%;
+  margin-top: -2px;
+  
+  padding-right: 8px;
+  padding-left: 1px;
+  padding-bottom: 10px;
+
+  /*margin-right: 20px;*/
+  padding-top: 10px;
+  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
+  border-top: none;
+  background-color: rgba(255,255,255,1);
+  position: absolute; 
+  z-index: 10;
+}
+
+.dropdown-check-list ul.items li {
+  list-style: none;
+}
+
+/*.dropdown-check-list.visible .anchor {*/
+  /*color: #0094ff;*/
+/*}*/
+
+.dropdown-check-list.visible .items {
+  display: block;
+}
 
 </style>
 </head>
@@ -571,7 +642,7 @@
       </div>
       
     </div> -->
-    <div class="flexCol2" style="left: 43%;">
+    <div class="flexCol2" style="left: 42%; top: 1%; position: relative;">
       <div style="position: relative; font-size: 1vw; top: 3%; color: black; background-color: rgba(255,255,255, 1);text-align: center; width: 105%; height: 125%; border: 3px solid #00daff; border-radius: 10px;">
         <h2><u>&nbsp Toggle All &nbsp</u></h2>
 
@@ -579,24 +650,41 @@
 
         <h4><u>&nbsp Toggle Grid &nbsp</u></h4>
         <div style="display: flex; flex-direction: column;">
-          <div class="dropdown">
-            <button onclick="show_dropdown('chemicalDropdown')" class="dropbtn">Chemical &#9660</button>
-            <div id="chemicalDropdown" class="dropdown-content" style="right: 7%;">
-              <a href="#home">AGOC-3A</a>
-              <a href="#about">Appluimonia</a>
-              <a href="#contact">Chlorodinine</a>
-              <a href="#other">Methylosmolene</a>
-            </div>
+
+          <div id="chemicalDropdown" class="dropdown-check-list">
+            <span class="anchor">Select Chemicals</span>
+            <ul class="items" style="text-align: left">
+              <li><input type="checkbox"/>AGOC-3A </li>
+              <li><input type="checkbox"/>Appluimonia</li>
+              <li><input type="checkbox"/>Chlorodinine </li>
+              <li><input type="checkbox"/>Methylosmolene </li>
+            </ul>
           </div>
 
-          <div class="dropdown">
-            <button onclick="show_dropdown('monthDropdown')" class="dropbtn">Month &#9660</button>
-            <div id="monthDropdown" class="dropdown-content" style="right: 20%;">
-              <a href="#home">April</a>
-              <a href="#about">August</a>
-              <a href="#contact">December</a>
-            </div>
+          <div id="monthDropdown" class="dropdown-check-list" style="margin-top: 5%;">
+            <span class="anchor" style="padding-left: 13.7px; padding-right: 40px">Select Months</span>
+            <ul class="items" style="text-align: left">
+              <li><input type="checkbox"/>April</li>
+              <li><input type="checkbox"/>August</li>
+              <li><input type="checkbox"/>December </li>
+            </ul>
           </div>
+
+          <div id="sensorDropdown" class="dropdown-check-list" style="margin-top: 5%;">
+            <span class="anchor" style="padding-left: 9px; padding-right: 40px">Select Sensors</span>
+            <ul class="items" style="text-align: left; position: absolute;">
+              <li><input type="checkbox"/>Sensor 1</li>
+              <li><input type="checkbox"/>Sensor 2</li>
+              <li><input type="checkbox"/>Sensor 3</li>
+              <li><input type="checkbox"/>Sensor 4</li>
+              <li><input type="checkbox"/>Sensor 5</li>
+              <li><input type="checkbox"/>Sensor 6</li>
+              <li><input type="checkbox"/>Sensor 7</li>
+              <li><input type="checkbox"/>Sensor 8</li>
+              <li><input type="checkbox"/>Sensor 9</li>
+            </ul>
+          </div>
+
         </div>
 
         <h4><u>&nbsp Toggle Pie Chart &nbsp</u></h4>
@@ -617,7 +705,7 @@
 <script>
   // EXAMPLE OF HOW TO USE THE JSON OBJECTs
   // This file links the data.js file in the webserver folder
-  // alert(JSON.stringify(METOR_DATA));
+  // alert(JSON.stringify(METEOR_DATA));
 
   function toggleMap (toggle, name, count) {
     var Toggle = document.getElementById(toggle);
@@ -639,26 +727,925 @@
         1200);
   });
 
-/* When the user clicks on the button, 
-toggle between hiding and showing the dropdown content */
-function show_dropdown(name) {
-  document.getElementById(name).classList.toggle("show");
-}
 
-// Close the dropdown if the user clicks outside of it
-window.onclick = function(event) {
-  if (!event.target.matches('.dropbtn')) {
-    var dropdowns = document.getElementsByClassName("dropdown-content");
-    var i;
-    for (i = 0; i < dropdowns.length; i++) {
-      var openDropdown = dropdowns[i];
-      if (openDropdown.classList.contains('show')) {
-        openDropdown.classList.remove('show');
-      }
+  var chemList = document.getElementById('chemicalDropdown');
+  chemList.getElementsByClassName('anchor')[0].onclick = function(evt) {
+    if (chemList.classList.contains('visible'))
+      chemList.classList.remove('visible');
+    else
+      chemList.classList.add('visible');
+  }
+
+  var monthList = document.getElementById('monthDropdown');
+  monthList.getElementsByClassName('anchor')[0].onclick = function(evt) {
+    if (monthList.classList.contains('visible'))
+      monthList.classList.remove('visible');
+    else
+      monthList.classList.add('visible');
+  }
+
+  var sensorList = document.getElementById('sensorDropdown');
+  sensorList.getElementsByClassName('anchor')[0].onclick = function(evt) {
+    if (sensorList.classList.contains('visible'))
+      sensorList.classList.remove('visible');
+    else
+      sensorList.classList.add('visible');
+  }
+
+  
+  var numApr = 0;
+  var numAug = 0;
+  var numDec = 0;
+
+  var WindDirectionApr = 0;
+  var WindDirectionAug = 0;
+  var WindDirectionDec = 0;
+
+  var WindSpeedApr = 0;
+  var WindSpeedAug = 0;
+  var WindSpeedDec = 0;
+
+  // All Sensor Methylosmolene Reading 
+  // Month April
+  var S1AprMethReading = 0; 
+  var S2AprMethReading = 0; 
+  var S3AprMethReading = 0; 
+  var S4AprMethReading = 0; 
+  var S5AprMethReading = 0; 
+  var S6AprMethReading = 0; 
+  var S7AprMethReading = 0; 
+  var S8AprMethReading = 0; 
+  var S9AprMethReading = 0;
+  // Month August
+  var S1AugMethReading = 0; 
+  var S2AugMethReading = 0; 
+  var S3AugMethReading = 0; 
+  var S4AugMethReading = 0; 
+  var S5AugMethReading = 0; 
+  var S6AugMethReading = 0; 
+  var S7AugMethReading = 0; 
+  var S8AugMethReading = 0; 
+  var S9AugMethReading = 0; 
+  // Month December
+  var S1DecMethReading = 0; 
+  var S2DecMethReading = 0; 
+  var S3DecMethReading = 0; 
+  var S4DecMethReading = 0; 
+  var S5DecMethReading = 0; 
+  var S6DecMethReading = 0; 
+  var S7DecMethReading = 0; 
+  var S8DecMethReading = 0; 
+  var S9DecMethReading = 0; 
+
+  // All Sensor Chlorodinine Reading 
+  // Month April
+  var S1AprChloroReading = 0; 
+  var S2AprChloroReading = 0; 
+  var S3AprChloroReading = 0; 
+  var S4AprChloroReading = 0; 
+  var S5AprChloroReading = 0; 
+  var S6AprChloroReading = 0; 
+  var S7AprChloroReading = 0; 
+  var S8AprChloroReading = 0; 
+  var S9AprChloroReading = 0;
+  // Month August
+  var S1AugChloroReading = 0; 
+  var S2AugChloroReading = 0; 
+  var S3AugChloroReading = 0; 
+  var S4AugChloroReading = 0; 
+  var S5AugChloroReading = 0; 
+  var S6AugChloroReading = 0; 
+  var S7AugChloroReading = 0; 
+  var S8AugChloroReading = 0; 
+  var S9AugChloroReading = 0; 
+  // Month December
+  var S1DecChloroReading = 0; 
+  var S2DecChloroReading = 0; 
+  var S3DecChloroReading = 0; 
+  var S4DecChloroReading = 0; 
+  var S5DecChloroReading = 0; 
+  var S6DecChloroReading = 0; 
+  var S7DecChloroReading = 0; 
+  var S8DecChloroReading = 0; 
+  var S9DecChloroReading = 0; 
+
+  // All Sensor Appluimonia Reading 
+  // Month April
+  var S1AprAppReading = 0; 
+  var S2AprAppReading = 0; 
+  var S3AprAppReading = 0; 
+  var S4AprAppReading = 0; 
+  var S5AprAppReading = 0; 
+  var S6AprAppReading = 0; 
+  var S7AprAppReading = 0; 
+  var S8AprAppReading = 0; 
+  var S9AprAppReading = 0;
+  // Month August
+  var S1AugAppReading = 0; 
+  var S2AugAppReading = 0; 
+  var S3AugAppReading = 0; 
+  var S4AugAppReading = 0; 
+  var S5AugAppReading = 0; 
+  var S6AugAppReading = 0; 
+  var S7AugAppReading = 0; 
+  var S8AugAppReading = 0; 
+  var S9AugAppReading = 0; 
+  // Month December
+  var S1DecAppReading = 0; 
+  var S2DecAppReading = 0; 
+  var S3DecAppReading = 0; 
+  var S4DecAppReading = 0; 
+  var S5DecAppReading = 0; 
+  var S6DecAppReading = 0; 
+  var S7DecAppReading = 0; 
+  var S8DecAppReading = 0; 
+  var S9DecAppReading = 0; 
+
+  // All Sensor AGOC-3A Reading 
+  // Month April
+  var S1AprAgocReading = 0; 
+  var S2AprAgocReading = 0; 
+  var S3AprAgocReading = 0; 
+  var S4AprAgocReading = 0; 
+  var S5AprAgocReading = 0; 
+  var S6AprAgocReading = 0; 
+  var S7AprAgocReading = 0; 
+  var S8AprAgocReading = 0; 
+  var S9AprAgocReading = 0;
+  // Month August
+  var S1AugAgocReading = 0; 
+  var S2AugAgocReading = 0; 
+  var S3AugAgocReading = 0; 
+  var S4AugAgocReading = 0; 
+  var S5AugAgocReading = 0; 
+  var S6AugAgocReading = 0; 
+  var S7AugAgocReading = 0; 
+  var S8AugAgocReading = 0; 
+  var S9AugAgocReading = 0; 
+  // Month December
+  var S1DecAgocReading = 0; 
+  var S2DecAgocReading = 0; 
+  var S3DecAgocReading = 0; 
+  var S4DecAgocReading = 0; 
+  var S5DecAgocReading = 0; 
+  var S6DecAgocReading = 0; 
+  var S7DecAgocReading = 0; 
+  var S8DecAgocReading = 0; 
+  var S9DecAgocReading = 0; 
+
+  
+
+  // function groupDatesbyMonth(time) {
+  //   var date = new Date(time);
+  //   var dateString = date.toUTCString();
+  //   if (dateString.indexOf("Apr") > 0) {
+  //     // console.log("Month is Apr");
+  //     numApr += 1;
+  //   }
+  //   else if (dateString.indexOf("Aug") > 0) {
+  //     // console.log("Month is Aug");
+  //     numAug += 1;
+  //   }
+  //   else if (dateString.indexOf("Dec") > 0) {
+  //     // console.log("Month is Dec");
+  //     numDec += 1;
+  //   }
+  // }
+
+  function PasrsingMeteorData() {
+    for (const key in METEOR_DATA) {
+        // groupDatesbyMonth(METEOR_DATA[key]["Date"]);
+        var date = new Date(METEOR_DATA[key]["Date"]);
+        var dateString = date.toUTCString();
+
+        if (dateString.indexOf("Apr") > 0) {
+          numApr += 1;
+          WindDirectionApr += METEOR_DATA[key]["Wind Direction"];
+          WindSpeedApr += METEOR_DATA[key]["Wind Speed (m\/s)"];
+        }
+        else if (dateString.indexOf("Aug") > 0) {
+          numAug += 1;
+          WindDirectionAug += METEOR_DATA[key]["Wind Direction"];
+          WindSpeedAug += METEOR_DATA[key]["Wind Speed (m\/s)"];
+        }
+        else if (dateString.indexOf("Dec") > 0) {
+          numDec += 1;
+          WindDirectionDec += METEOR_DATA[key]["Wind Direction"];
+          WindSpeedDec += METEOR_DATA[key]["Wind Speed (m\/s)"];
+        }  
     }
   }
-}
 
+
+  for(i = 1; i < 5; i++) { 
+      window['var_'+i] = + i; 
+  } 
+    
+  // console.log(var_1); 
+  // console.log(var_2);
+  // console.log(var_3);
+  // console.log(var_4);
+
+  PasrsingMeteorData();
+// console.log(var_1); 
+//   console.log(var_2);
+//   console.log(var_3);
+//   console.log(var_4);
+//   console.log(two);
+
+  console.log("APRIL:");
+  console.log(numApr);
+  console.log(WindDirectionApr/numApr);
+  console.log(WindSpeedApr/numApr);
+  
+  console.log("AUGUST:");
+  console.log(numAug);
+  console.log(WindDirectionAug/numAug);
+  console.log(WindSpeedAug/numAug);
+  
+  console.log("DECEMBER:");
+  console.log(numDec);
+  console.log(WindDirectionDec/numDec);
+  console.log(WindSpeedDec/numDec);
+
+  function ParsingSensorData() {
+    var avgArray = new Array(108).fill(0);
+
+    for (const key in SENSOR_DATA) {
+      var chemName = SENSOR_DATA[key]["Chemical"]; 
+      var date = new Date(SENSOR_DATA[key]["Date"]);
+      var dateString = date.toUTCString();
+
+      // Sensor 1
+      if (SENSOR_DATA[key]["Monitor"] == 1) {
+        // Month of April
+        if (dateString.indexOf("Apr") > 0) {
+          // Separating by chemical
+          if (chemName == "Methylosmolene") {
+            S1AprMethReading += SENSOR_DATA[key]["Reading"];
+            avgArray[0] += 1;
+          }
+          else if (chemName == "Chlorodinine") {
+            S1AprChloroReading += SENSOR_DATA[key]["Reading"];
+            avgArray[1] += 1;
+          }
+          else if (chemName == "Appluimonia") {
+            S1AprAppReading += SENSOR_DATA[key]["Reading"];
+            avgArray[2] += 1;
+          }
+          else if (chemName == "AGOC-3A") {
+            S1AprAgocReading += SENSOR_DATA[key]["Reading"];
+            avgArray[3] += 1;
+          } 
+        }
+        // Month of August
+        else if (dateString.indexOf("Aug") > 0) {
+          if (chemName == "Methylosmolene") {
+            S1AugMethReading += SENSOR_DATA[key]["Reading"];
+            avgArray[4] += 1;
+          }
+          else if (chemName == "Chlorodinine") {
+            S1AugChloroReading += SENSOR_DATA[key]["Reading"];
+            avgArray[5] += 1;
+          }
+          else if (chemName == "Appluimonia") {
+            S1AugAppReading += SENSOR_DATA[key]["Reading"];
+            avgArray[6] += 1;
+          }
+          else if (chemName == "AGOC-3A") {
+            S1AugAgocReading += SENSOR_DATA[key]["Reading"];
+            avgArray[7] += 1;
+          } 
+        }
+        else if (dateString.indexOf("Dec") > 0) {
+          if (chemName == "Methylosmolene") {
+            S1DecMethReading += SENSOR_DATA[key]["Reading"];
+            avgArray[8] += 1;
+          }
+          else if (chemName == "Chlorodinine") {
+            S1DecChloroReading += SENSOR_DATA[key]["Reading"];
+            avgArray[9] += 1;
+          }
+          else if (chemName == "Appluimonia") {
+            S1DecAppReading += SENSOR_DATA[key]["Reading"];
+            avgArray[10] += 1;
+          }
+          else if (chemName == "AGOC-3A") {
+            S1DecAgocReading += SENSOR_DATA[key]["Reading"];
+            avgArray[11] += 1;
+          } 
+        }
+      }
+
+      // Sensor 2
+      if (SENSOR_DATA[key]["Monitor"] == 2) {
+        // Month of April
+        if (dateString.indexOf("Apr") > 0) {
+          // Separating by chemical
+          if (chemName == "Methylosmolene") {
+            S2AprMethReading += SENSOR_DATA[key]["Reading"];
+            avgArray[12] += 1;
+          }
+          else if (chemName == "Chlorodinine") {
+            S2AprChloroReading += SENSOR_DATA[key]["Reading"];
+            avgArray[13] += 1;
+          }
+          else if (chemName == "Appluimonia") {
+            S2AprAppReading += SENSOR_DATA[key]["Reading"];
+            avgArray[14] += 1;
+          }
+          else if (chemName == "AGOC-3A") {
+            S2AprAgocReading += SENSOR_DATA[key]["Reading"];
+            avgArray[15] += 1;
+          } 
+        }
+        // Month of August
+        else if (dateString.indexOf("Aug") > 0) {
+          if (chemName == "Methylosmolene") {
+            S2AugMethReading += SENSOR_DATA[key]["Reading"];
+            avgArray[16] += 1;
+          }
+          else if (chemName == "Chlorodinine") {
+            S2AugChloroReading += SENSOR_DATA[key]["Reading"];
+            avgArray[17] += 1;
+          }
+          else if (chemName == "Appluimonia") {
+            S2AugAppReading += SENSOR_DATA[key]["Reading"];
+            avgArray[18] += 1;
+          }
+          else if (chemName == "AGOC-3A") {
+            S2AugAgocReading += SENSOR_DATA[key]["Reading"];
+            avgArray[19] += 1;
+          } 
+        }
+        else if (dateString.indexOf("Dec") > 0) {
+          if (chemName == "Methylosmolene") {
+            S2DecMethReading += SENSOR_DATA[key]["Reading"];
+            avgArray[20] += 1;
+          }
+          else if (chemName == "Chlorodinine") {
+            S2DecChloroReading += SENSOR_DATA[key]["Reading"];
+            avgArray[21] += 1;
+          }
+          else if (chemName == "Appluimonia") {
+            S2DecAppReading += SENSOR_DATA[key]["Reading"];
+            avgArray[22] += 1;
+          }
+          else if (chemName == "AGOC-3A") {
+            S2DecAgocReading += SENSOR_DATA[key]["Reading"];
+            avgArray[23] += 1;
+          } 
+        }
+      }
+
+      // Sensor 3
+      if (SENSOR_DATA[key]["Monitor"] == 3) {
+        // Month of April
+        if (dateString.indexOf("Apr") > 0) {
+          // Separating by chemical
+          if (chemName == "Methylosmolene") {
+            S3AprMethReading += SENSOR_DATA[key]["Reading"];
+            avgArray[24] += 1;
+          }
+          else if (chemName == "Chlorodinine") {
+            S3AprChloroReading += SENSOR_DATA[key]["Reading"];
+            avgArray[25] += 1;
+          }
+          else if (chemName == "Appluimonia") {
+            S3AprAppReading += SENSOR_DATA[key]["Reading"];
+            avgArray[26] += 1;
+          }
+          else if (chemName == "AGOC-3A") {
+            S3AprAgocReading += SENSOR_DATA[key]["Reading"];
+            avgArray[27] += 1;
+          } 
+        }
+        // Month of August
+        else if (dateString.indexOf("Aug") > 0) {
+          if (chemName == "Methylosmolene") {
+            S3AugMethReading += SENSOR_DATA[key]["Reading"];
+            avgArray[28] += 1;
+          }
+          else if (chemName == "Chlorodinine") {
+            S3AugChloroReading += SENSOR_DATA[key]["Reading"];
+            avgArray[29] += 1;
+          }
+          else if (chemName == "Appluimonia") {
+            S3AugAppReading += SENSOR_DATA[key]["Reading"];
+            avgArray[30] += 1;
+          }
+          else if (chemName == "AGOC-3A") {
+            S3AugAgocReading += SENSOR_DATA[key]["Reading"];
+            avgArray[31] += 1;
+          } 
+        }
+        else if (dateString.indexOf("Dec") > 0) {
+          if (chemName == "Methylosmolene") {
+            S3DecMethReading += SENSOR_DATA[key]["Reading"];
+            avgArray[32] += 1;
+          }
+          else if (chemName == "Chlorodinine") {
+            S3DecChloroReading += SENSOR_DATA[key]["Reading"];
+            avgArray[33] += 1;
+          }
+          else if (chemName == "Appluimonia") {
+            S3DecAppReading += SENSOR_DATA[key]["Reading"];
+            avgArray[34] += 1;
+          }
+          else if (chemName == "AGOC-3A") {
+            S3DecAgocReading += SENSOR_DATA[key]["Reading"];
+            avgArray[35] += 1;
+          } 
+        }
+      }
+
+      // Sensor 4
+      if (SENSOR_DATA[key]["Monitor"] == 4) {
+        // Month of April
+        if (dateString.indexOf("Apr") > 0) {
+          // Separating by chemical
+          if (chemName == "Methylosmolene") {
+            S4AprMethReading += SENSOR_DATA[key]["Reading"];
+            avgArray[36] += 1;
+          }
+          else if (chemName == "Chlorodinine") {
+            S4AprChloroReading += SENSOR_DATA[key]["Reading"];
+            avgArray[37] += 1;
+          }
+          else if (chemName == "Appluimonia") {
+            S4AprAppReading += SENSOR_DATA[key]["Reading"];
+            avgArray[38] += 1;
+          }
+          else if (chemName == "AGOC-3A") {
+            S4AprAgocReading += SENSOR_DATA[key]["Reading"];
+            avgArray[39] += 1;
+          } 
+        }
+        // Month of August
+        else if (dateString.indexOf("Aug") > 0) {
+          if (chemName == "Methylosmolene") {
+            S4AugMethReading += SENSOR_DATA[key]["Reading"];
+            avgArray[40] += 1;
+          }
+          else if (chemName == "Chlorodinine") {
+            S4AugChloroReading += SENSOR_DATA[key]["Reading"];
+            avgArray[41] += 1;
+          }
+          else if (chemName == "Appluimonia") {
+            S4AugAppReading += SENSOR_DATA[key]["Reading"];
+            avgArray[42] += 1;
+          }
+          else if (chemName == "AGOC-3A") {
+            S4AugAgocReading += SENSOR_DATA[key]["Reading"];
+            avgArray[43] += 1;
+          } 
+        }
+        else if (dateString.indexOf("Dec") > 0) {
+          if (chemName == "Methylosmolene") {
+            S4DecMethReading += SENSOR_DATA[key]["Reading"];
+            avgArray[44] += 1;
+          }
+          else if (chemName == "Chlorodinine") {
+            S4DecChloroReading += SENSOR_DATA[key]["Reading"];
+            avgArray[45] += 1;
+          }
+          else if (chemName == "Appluimonia") {
+            S4DecAppReading += SENSOR_DATA[key]["Reading"];
+            avgArray[46] += 1;
+          }
+          else if (chemName == "AGOC-3A") {
+            S4DecAgocReading += SENSOR_DATA[key]["Reading"];
+            avgArray[47] += 1;
+          } 
+        }
+      }
+
+      // Sensor 5
+      if (SENSOR_DATA[key]["Monitor"] == 5) {
+        // Month of April
+        if (dateString.indexOf("Apr") > 0) {
+          // Separating by chemical
+          if (chemName == "Methylosmolene") {
+            S5AprMethReading += SENSOR_DATA[key]["Reading"];
+            avgArray[48] += 1;
+          }
+          else if (chemName == "Chlorodinine") {
+            S5AprChloroReading += SENSOR_DATA[key]["Reading"];
+            avgArray[49] += 1;
+          }
+          else if (chemName == "Appluimonia") {
+            S5AprAppReading += SENSOR_DATA[key]["Reading"];
+            avgArray[50] += 1;
+          }
+          else if (chemName == "AGOC-3A") {
+            S5AprAgocReading += SENSOR_DATA[key]["Reading"];
+            avgArray[51] += 1;
+          } 
+        }
+        // Month of August
+        else if (dateString.indexOf("Aug") > 0) {
+          if (chemName == "Methylosmolene") {
+            S5AugMethReading += SENSOR_DATA[key]["Reading"];
+            avgArray[52] += 1;
+          }
+          else if (chemName == "Chlorodinine") {
+            S5AugChloroReading += SENSOR_DATA[key]["Reading"];
+            avgArray[53] += 1;
+          }
+          else if (chemName == "Appluimonia") {
+            S5AugAppReading += SENSOR_DATA[key]["Reading"];
+            avgArray[54] += 1;
+          }
+          else if (chemName == "AGOC-3A") {
+            S5AugAgocReading += SENSOR_DATA[key]["Reading"];
+            avgArray[55] += 1;
+          } 
+        }
+        else if (dateString.indexOf("Dec") > 0) {
+          if (chemName == "Methylosmolene") {
+            S5DecMethReading += SENSOR_DATA[key]["Reading"];
+            avgArray[56] += 1;
+          }
+          else if (chemName == "Chlorodinine") {
+            S5DecChloroReading += SENSOR_DATA[key]["Reading"];
+            avgArray[57] += 1;
+          }
+          else if (chemName == "Appluimonia") {
+            S5DecAppReading += SENSOR_DATA[key]["Reading"];
+            avgArray[58] += 1;
+          }
+          else if (chemName == "AGOC-3A") {
+            S5DecAgocReading += SENSOR_DATA[key]["Reading"];
+            avgArray[59] += 1;
+          } 
+        }
+      }
+
+      // Sensor 6
+      if (SENSOR_DATA[key]["Monitor"] == 6) {
+        // Month of April
+        if (dateString.indexOf("Apr") > 0) {
+          // Separating by chemical
+          if (chemName == "Methylosmolene") {
+            S6AprMethReading += SENSOR_DATA[key]["Reading"];
+            avgArray[60] += 1;
+          }
+          else if (chemName == "Chlorodinine") {
+            S6AprChloroReading += SENSOR_DATA[key]["Reading"];
+            avgArray[61] += 1;
+          }
+          else if (chemName == "Appluimonia") {
+            S6AprAppReading += SENSOR_DATA[key]["Reading"];
+            avgArray[62] += 1;
+          }
+          else if (chemName == "AGOC-3A") {
+            S6AprAgocReading += SENSOR_DATA[key]["Reading"];
+            avgArray[63] += 1;
+          } 
+        }
+        // Month of August
+        else if (dateString.indexOf("Aug") > 0) {
+          if (chemName == "Methylosmolene") {
+            S6AugMethReading += SENSOR_DATA[key]["Reading"];
+            avgArray[64] += 1;
+          }
+          else if (chemName == "Chlorodinine") {
+            S6AugChloroReading += SENSOR_DATA[key]["Reading"];
+            avgArray[65] += 1;
+          }
+          else if (chemName == "Appluimonia") {
+            S6AugAppReading += SENSOR_DATA[key]["Reading"];
+            avgArray[66] += 1;
+          }
+          else if (chemName == "AGOC-3A") {
+            S6AugAgocReading += SENSOR_DATA[key]["Reading"];
+            avgArray[67] += 1;
+          } 
+        }
+        else if (dateString.indexOf("Dec") > 0) {
+          if (chemName == "Methylosmolene") {
+            S6DecMethReading += SENSOR_DATA[key]["Reading"];
+            avgArray[68] += 1;
+          }
+          else if (chemName == "Chlorodinine") {
+            S6DecChloroReading += SENSOR_DATA[key]["Reading"];
+            avgArray[69] += 1;
+          }
+          else if (chemName == "Appluimonia") {
+            S6DecAppReading += SENSOR_DATA[key]["Reading"];
+            avgArray[70] += 1;
+          }
+          else if (chemName == "AGOC-3A") {
+            S6DecAgocReading += SENSOR_DATA[key]["Reading"];
+            avgArray[71] += 1;
+          } 
+        }
+      }
+
+      // Sensor 7
+      if (SENSOR_DATA[key]["Monitor"] == 7) {
+        // Month of April
+        if (dateString.indexOf("Apr") > 0) {
+          // Separating by chemical
+          if (chemName == "Methylosmolene") {
+            S7AprMethReading += SENSOR_DATA[key]["Reading"];
+            avgArray[72] += 1;
+          }
+          else if (chemName == "Chlorodinine") {
+            S7AprChloroReading += SENSOR_DATA[key]["Reading"];
+            avgArray[73] += 1;
+          }
+          else if (chemName == "Appluimonia") {
+            S7AprAppReading += SENSOR_DATA[key]["Reading"];
+            avgArray[74] += 1;
+          }
+          else if (chemName == "AGOC-3A") {
+            S7AprAgocReading += SENSOR_DATA[key]["Reading"];
+            avgArray[75] += 1;
+          } 
+        }
+        // Month of August
+        else if (dateString.indexOf("Aug") > 0) {
+          if (chemName == "Methylosmolene") {
+            S7AugMethReading += SENSOR_DATA[key]["Reading"];
+            avgArray[76] += 1;
+          }
+          else if (chemName == "Chlorodinine") {
+            S7AugChloroReading += SENSOR_DATA[key]["Reading"];
+            avgArray[77] += 1;
+          }
+          else if (chemName == "Appluimonia") {
+            S7AugAppReading += SENSOR_DATA[key]["Reading"];
+            avgArray[78] += 1;
+          }
+          else if (chemName == "AGOC-3A") {
+            S7AugAgocReading += SENSOR_DATA[key]["Reading"];
+            avgArray[79] += 1;
+          } 
+        }
+        else if (dateString.indexOf("Dec") > 0) {
+          if (chemName == "Methylosmolene") {
+            S7DecMethReading += SENSOR_DATA[key]["Reading"];
+            avgArray[80] += 1;
+          }
+          else if (chemName == "Chlorodinine") {
+            S7DecChloroReading += SENSOR_DATA[key]["Reading"];
+            avgArray[81] += 1;
+          }
+          else if (chemName == "Appluimonia") {
+            S7DecAppReading += SENSOR_DATA[key]["Reading"];
+            avgArray[82] += 1;
+          }
+          else if (chemName == "AGOC-3A") {
+            S7DecAgocReading += SENSOR_DATA[key]["Reading"];
+            avgArray[83] += 1;
+          } 
+        }
+      }
+
+      // Sensor 8
+      if (SENSOR_DATA[key]["Monitor"] == 8) {
+        // Month of April
+        if (dateString.indexOf("Apr") > 0) {
+          // Separating by chemical
+          if (chemName == "Methylosmolene") {
+            S8AprMethReading += SENSOR_DATA[key]["Reading"];
+            avgArray[84] += 1;
+          }
+          else if (chemName == "Chlorodinine") {
+            S8AprChloroReading += SENSOR_DATA[key]["Reading"];
+            avgArray[85] += 1;
+          }
+          else if (chemName == "Appluimonia") {
+            S8AprAppReading += SENSOR_DATA[key]["Reading"];
+            avgArray[86] += 1;
+          }
+          else if (chemName == "AGOC-3A") {
+            S8AprAgocReading += SENSOR_DATA[key]["Reading"];
+            avgArray[87] += 1;
+          } 
+        }
+        // Month of August
+        else if (dateString.indexOf("Aug") > 0) {
+          if (chemName == "Methylosmolene") {
+            S8AugMethReading += SENSOR_DATA[key]["Reading"];
+            avgArray[88] += 1;
+          }
+          else if (chemName == "Chlorodinine") {
+            S8AugChloroReading += SENSOR_DATA[key]["Reading"];
+            avgArray[89] += 1;
+          }
+          else if (chemName == "Appluimonia") {
+            S8AugAppReading += SENSOR_DATA[key]["Reading"];
+            avgArray[90] += 1;
+          }
+          else if (chemName == "AGOC-3A") {
+            S8AugAgocReading += SENSOR_DATA[key]["Reading"];
+            avgArray[91] += 1;
+          } 
+        }
+        else if (dateString.indexOf("Dec") > 0) {
+          if (chemName == "Methylosmolene") {
+            S8DecMethReading += SENSOR_DATA[key]["Reading"];
+            avgArray[92] += 1;
+          }
+          else if (chemName == "Chlorodinine") {
+            S8DecChloroReading += SENSOR_DATA[key]["Reading"];
+            avgArray[93] += 1;
+          }
+          else if (chemName == "Appluimonia") {
+            S8DecAppReading += SENSOR_DATA[key]["Reading"];
+            avgArray[94] += 1;
+          }
+          else if (chemName == "AGOC-3A") {
+            S8DecAgocReading += SENSOR_DATA[key]["Reading"];
+            avgArray[95] += 1;
+          } 
+        }
+      }
+
+      // Sensor 9
+      if (SENSOR_DATA[key]["Monitor"] == 9) {
+        // Month of April
+        if (dateString.indexOf("Apr") > 0) {
+          // Separating by chemical
+          if (chemName == "Methylosmolene") {
+            S9AprMethReading += SENSOR_DATA[key]["Reading"];
+            avgArray[96] += 1;
+          }
+          else if (chemName == "Chlorodinine") {
+            S9AprChloroReading += SENSOR_DATA[key]["Reading"];
+            avgArray[97] += 1;
+          }
+          else if (chemName == "Appluimonia") {
+            S9AprAppReading += SENSOR_DATA[key]["Reading"];
+            avgArray[98] += 1;
+          }
+          else if (chemName == "AGOC-3A") {
+            S9AprAgocReading += SENSOR_DATA[key]["Reading"];
+            avgArray[99] += 1;
+          } 
+        }
+        // Month of August
+        else if (dateString.indexOf("Aug") > 0) {
+          if (chemName == "Methylosmolene") {
+            S9AugMethReading += SENSOR_DATA[key]["Reading"];
+            avgArray[100] += 1;
+          }
+          else if (chemName == "Chlorodinine") {
+            S9AugChloroReading += SENSOR_DATA[key]["Reading"];
+            avgArray[101] += 1;
+          }
+          else if (chemName == "Appluimonia") {
+            S9AugAppReading += SENSOR_DATA[key]["Reading"];
+            avgArray[102] += 1;
+          }
+          else if (chemName == "AGOC-3A") {
+            S9AugAgocReading += SENSOR_DATA[key]["Reading"];
+            avgArray[103] += 1;
+          } 
+        }
+        else if (dateString.indexOf("Dec") > 0) {
+          if (chemName == "Methylosmolene") {
+            S9DecMethReading += SENSOR_DATA[key]["Reading"];
+            avgArray[104] += 1;
+          }
+          else if (chemName == "Chlorodinine") {
+            S9DecChloroReading += SENSOR_DATA[key]["Reading"];
+            avgArray[105] += 1;
+          }
+          else if (chemName == "Appluimonia") {
+            S9DecAppReading += SENSOR_DATA[key]["Reading"];
+            avgArray[106] += 1;
+          }
+          else if (chemName == "AGOC-3A") {
+            S9DecAgocReading += SENSOR_DATA[key]["Reading"];
+            avgArray[107] += 1;
+          } 
+        }
+      }
+    }
+    // Stretch goal --> going deeper in timeline (by weeks rather than months)
+    // Stretch goal --> dynamic gradient 
+    S1AprMethReading /= avgArray[0];
+    S1AprChloroReading /= avgArray[1];
+    S1AprAppReading /= avgArray[2];
+    S1AprAgocReading /= avgArray[3];
+    S1AugMethReading /= avgArray[4];
+    S1AugChloroReading /= avgArray[5];
+    S1AugAppReading /= avgArray[6];
+    S1AugAgocReading /= avgArray[7];
+    S1DecMethReading /= avgArray[8];
+    S1DecChloroReading /= avgArray[9];
+    S1DecAppReading /= avgArray[10];
+    S1DecAgocReading /= avgArray[11];
+
+    S2AprMethReading /= avgArray[12];
+    S2AprChloroReading /= avgArray[13];
+    S2AprAppReading /= avgArray[14];
+    S2AprAgocReading /= avgArray[15];
+    S2AugMethReading /= avgArray[16];
+    S2AugChloroReading /= avgArray[17];
+    S2AugAppReading /= avgArray[18];
+    S2AugAgocReading /= avgArray[19];
+    S2DecMethReading /= avgArray[20];
+    S2DecChloroReading /= avgArray[21];
+    S2DecAppReading /= avgArray[22];
+    S2DecAgocReading /= avgArray[23];
+
+    S3AprMethReading /= avgArray[24];
+    S3AprChloroReading /= avgArray[25];
+    S3AprAppReading /= avgArray[26];
+    S3AprAgocReading /= avgArray[27];
+    S3AugMethReading /= avgArray[28];
+    S3AugChloroReading /= avgArray[29];
+    S3AugAppReading /= avgArray[30];
+    S3AugAgocReading /= avgArray[31];
+    S3DecMethReading /= avgArray[32];
+    S3DecChloroReading /= avgArray[33];
+    S3DecAppReading /= avgArray[34];
+    S3DecAgocReading /= avgArray[35];
+
+    S4AprMethReading /= avgArray[36];
+    S4AprChloroReading /= avgArray[37];
+    S4AprAppReading /= avgArray[38];
+    S4AprAgocReading /= avgArray[39];
+    S4AugMethReading /= avgArray[40];
+    S4AugChloroReading /= avgArray[41];
+    S4AugAppReading /= avgArray[42];
+    S4AugAgocReading /= avgArray[43];
+    S4DecMethReading /= avgArray[44];
+    S4DecChloroReading /= avgArray[45];
+    S4DecAppReading /= avgArray[46];
+    S4DecAgocReading /= avgArray[47];
+
+    S5AprMethReading /= avgArray[48];
+    S5AprChloroReading /= avgArray[49];
+    S5AprAppReading /= avgArray[50];
+    S5AprAgocReading /= avgArray[51];
+    S5AugMethReading /= avgArray[52];
+    S5AugChloroReading /= avgArray[53];
+    S5AugAppReading /= avgArray[54];
+    S5AugAgocReading /= avgArray[55];
+    S5DecMethReading /= avgArray[56];
+    S5DecChloroReading /= avgArray[57];
+    S5DecAppReading /= avgArray[58];
+    S5DecAgocReading /= avgArray[59];
+
+    S6AprMethReading /= avgArray[60];
+    S6AprChloroReading /= avgArray[61];
+    S6AprAppReading /= avgArray[62];
+    S6AprAgocReading /= avgArray[63];
+    S6AugMethReading /= avgArray[64];
+    S6AugChloroReading /= avgArray[65];
+    S6AugAppReading /= avgArray[66];
+    S6AugAgocReading /= avgArray[67];
+    S6DecMethReading /= avgArray[68];
+    S6DecChloroReading /= avgArray[69];
+    S6DecAppReading /= avgArray[70];
+    S6DecAgocReading /= avgArray[71];
+
+    S7AprMethReading /= avgArray[72];
+    S7AprChloroReading /= avgArray[73];
+    S7AprAppReading /= avgArray[74];
+    S7AprAgocReading /= avgArray[75];
+    S7AugMethReading /= avgArray[76];
+    S7AugChloroReading /= avgArray[77];
+    S7AugAppReading /= avgArray[78];
+    S7AugAgocReading /= avgArray[79];
+    S7DecMethReading /= avgArray[80];
+    S7DecChloroReading /= avgArray[81];
+    S7DecAppReading /= avgArray[82];
+    S7DecAgocReading /= avgArray[83];
+
+    S8AprMethReading /= avgArray[84];
+    S8AprChloroReading /= avgArray[85];
+    S8AprAppReading /= avgArray[86];
+    S8AprAgocReading /= avgArray[87];
+    S8AugMethReading /= avgArray[88];
+    S8AugChloroReading /= avgArray[89];
+    S8AugAppReading /= avgArray[90];
+    S8AugAgocReading /= avgArray[91];
+    S8DecMethReading /= avgArray[92];
+    S8DecChloroReading /= avgArray[93];
+    S8DecAppReading /= avgArray[94];
+    S8DecAgocReading /= avgArray[95];
+
+    S9AprMethReading /= avgArray[96];
+    S9AprChloroReading /= avgArray[97];
+    S9AprAppReading /= avgArray[98];
+    S9AprAgocReading /= avgArray[99];
+    S9AugMethReading /= avgArray[100];
+    S9AugChloroReading /= avgArray[101];
+    S9AugAppReading /= avgArray[102];
+    S9AugAgocReading /= avgArray[103];
+    S9DecMethReading /= avgArray[104];
+    S9DecChloroReading /= avgArray[105];
+    S9DecAppReading /= avgArray[106];
+    S9DecAgocReading /= avgArray[107];
+
+  }
+  ParsingSensorData();
 
 </script>
 
