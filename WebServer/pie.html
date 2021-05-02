@@ -17,10 +17,18 @@
   console.log(sensor_cols);
 
   // Grab all data from a specified sensor.
-  function data_from_sensor(sensor) {
+  function filter_data(sensor, months) {
+    if (months.length == 0) {
+      return [];
+    }
     const data = []
     for (var key in SENSOR_DATA) {
-      if (SENSOR_DATA[key]['Monitor'] == sensor) {
+      var curr_sensor = SENSOR_DATA[key]['Monitor'];
+      var curr_date   = new Date(SENSOR_DATA[key]['Date']);
+     //console.log(curr_date.toUTCString())
+      var curr_month  = curr_date.getUTCMonth() + 1;
+	    // console.log(curr_month);
+      if (curr_sensor == sensor && months.includes(curr_month)) {
         data.push(SENSOR_DATA[key]);
       }
     }
@@ -30,7 +38,7 @@
   // Grab all the existing sensors and chemicals
   // that exist with our dataset. This is to avoid
   // hardcoding information.
-  var sensor_1 = data_from_sensor(1);
+  var sensor_1 = filter_data(1, [4, 8, 12]);
   const CHEMICALS = new Set()
   var SENSORS   = new Set()
   for (var key in SENSOR_DATA) {
@@ -50,6 +58,9 @@
       chem_readings[chemical] = []
     })
 
+    if (d.length == 0) {
+      return Array(4).fill(1);
+    }
     d.forEach(element => {
       chemical = element['Chemical'];
       reading = element['Reading'];
@@ -72,14 +83,14 @@
   
 
 // Create pie chart
-  function generate_pie_chart(sensor) {
+  function generate_pie_chart(sensor, months) {
     myChart = new Chart(document.getElementById("myChart"), {
       type: 'pie',
       data: {
        labels: [... CHEMICALS],
        datasets: [{
          label: 'Sensor 1',
-         data: get_chemical_avgs(data_from_sensor(sensor)),
+         data: get_chemical_avgs(filter_data(sensor, months)),
          backgroundColor: [
            'rgb(255,99,132)',
            'rgb(54,162,235)',
@@ -93,16 +104,29 @@
   }
 
   // Update pie chart
-  function update_pie_chart(chart, sensor) {
+  function update_pie_chart(chart, sensor, months) {
     console.log("chart" + chart);
-    chart.data.datasets[0].data = get_chemical_avgs(data_from_sensor(sensor));
+    chart.data.datasets[0].data = get_chemical_avgs(filter_data(sensor, months));
     chart.update();
   }
 
   // Redraw pie chart on change of sensor.
   function redraw() {
     var sensor = document.getElementById("sensor-num").value;
-    update_pie_chart(myChart, sensor);
+    var april = document.getElementById("april").checked;
+    var august = document.getElementById("august").checked;
+    var december = document.getElementById("december").checked;
+    var months = [];
+    if (april) {
+      months.push(4);
+    }
+    if (august) {
+      months.push(8);
+    }
+    if (december) {
+      months.push(12);
+    }
+    update_pie_chart(myChart, sensor, months);
   }
 
 </script>
@@ -110,6 +134,9 @@
 <div>
     <canvas id="myChart"></canvas>
     <select id="sensor-num" onchange="redraw()">
+    <input type="checkbox" onclick="redraw()" id="april">April
+    <input type="checkbox" onclick="redraw()" id="august">August
+    <input type="checkbox" onclick="redraw()" id="december">December
     </select>
 </div>
 	<script>
@@ -121,7 +148,7 @@
      el.value = sensor;
      select.appendChild(el);
    })
-   generate_pie_chart(1);
+   generate_pie_chart(1, []);
 	</script>
 </body>
 
