@@ -4,40 +4,125 @@
 <title>Pie chart</title>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-<script>
- function loadJSON(callback, path) {   
-
-    var xobj = new XMLHttpRequest();
-    xobj.overrideMimeType("application/json");
-    xobj.open('GET', path, true); // Replace 'my_data' with the path to your file
-    xobj.onreadystatechange = function () {
-          if (xobj.readyState == 4 && xobj.status == "200") {
-            // Required use of an anonymous callback as .open will NOT return a value but simply returns undefined in asynchronous mode
-            callback(xobj.responseText);
-          }
-    };
-    xobj.send(null);  
- }
-
-    let meteor;
-    let sensor;
-    loadJSON((response) => {
-        meteor = JSON.parse(response);
-    }, 'meteor_index.json');
-
-    loadJSON((response) => {
-        sensor = JSON.parse(response);
-        console.log(sensor);
-    }, 'sensor_index.json');
-
-</script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="./data.js"></script>
 </head>
 
 <body>
 
 <script>
-console.log(sensor);
+  // Get all the column names for each data set.
+  sensor_cols = Object.keys(SENSOR_DATA["0"])
+  meteor_cols = Object.keys(METEOR_DATA["0"])
+  console.log(sensor_cols);
+
+  // Grab all data from a specified sensor.
+  function data_from_sensor(sensor) {
+    const data = []
+    for (var key in SENSOR_DATA) {
+      if (SENSOR_DATA[key]['Monitor'] == sensor) {
+        data.push(SENSOR_DATA[key]);
+      }
+    }
+    return data;
+  }
+
+  // Grab all the existing sensors and chemicals
+  // that exist with our dataset. This is to avoid
+  // hardcoding information.
+  var sensor_1 = data_from_sensor(1);
+  const CHEMICALS = new Set()
+  var SENSORS   = new Set()
+  for (var key in SENSOR_DATA) {
+    CHEMICALS.add(SENSOR_DATA[key]['Chemical']);
+    SENSORS.add(SENSOR_DATA[key]['Monitor']);
+  }
+  SENSORS = Array.from(SENSORS).sort();
+  // This will store our chart for creating and updating.
+  var myChart;
+
+  // Given an array of data, return an array of average 
+  // readings. The order of each readings correspond to the
+  // chemical order in CHEMICALS.
+  function get_chemical_avgs(d) {
+    var chem_readings = {}
+    CHEMICALS.forEach(chemical => {
+      chem_readings[chemical] = []
+    })
+
+    d.forEach(element => {
+      chemical = element['Chemical'];
+      reading = element['Reading'];
+      chem_readings[chemical].push(reading);
+    })
+
+    const chem_avgs = [];
+    // Caculate the average given an array of numbers.
+    function calculate_avg(data) {
+      len = data.length;
+      return data.reduce((a, b) => a + b) / len
+    }
+    CHEMICALS.forEach(chemical => {
+      avg = calculate_avg(chem_readings[chemical])
+      chem_avgs.push(avg);
+    })
+    console.log(chem_avgs);
+    return chem_avgs;
+  }
+  
+
+// Create pie chart
+  function generate_pie_chart(sensor) {
+    myChart = new Chart(document.getElementById("myChart"), {
+      type: 'pie',
+      data: {
+       labels: [... CHEMICALS],
+       datasets: [{
+         label: 'Sensor 1',
+         data: get_chemical_avgs(data_from_sensor(sensor)),
+         backgroundColor: [
+           'rgb(255,99,132)',
+           'rgb(54,162,235)',
+           'rgb(255,205,86',
+           'rgb(100,50,200)',
+         ],
+       }],
+         hoverOffset: 4,
+      }
+    })
+  }
+
+  // Update pie chart
+  function update_pie_chart(chart, sensor) {
+    console.log("chart" + chart);
+    chart.data.datasets[0].data = get_chemical_avgs(data_from_sensor(sensor));
+    chart.update();
+  }
+
+  // Redraw pie chart on change of sensor.
+  function redraw() {
+    var sensor = document.getElementById("sensor-num").value;
+    update_pie_chart(myChart, sensor);
+  }
+
 </script>
+
+<div>
+    <canvas id="myChart"></canvas>
+    <select id="sensor-num" onchange="redraw()">
+    </select>
+</div>
+	<script>
+   var select = document.getElementById("sensor-num");
+   var options = SENSORS;
+   SENSORS.forEach (sensor => {
+     var el = document.createElement("option");
+     el.textContent = sensor;
+     el.value = sensor;
+     select.appendChild(el);
+   })
+   generate_pie_chart(1);
+	</script>
 </body>
 
 </html>
