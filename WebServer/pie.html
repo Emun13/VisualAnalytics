@@ -18,6 +18,7 @@
 
   // Grab all data from a specified sensor.
   function filter_data(sensor, months) {
+    // Return the empty array if no months are specified.
     if (months.length == 0) {
       return [];
     }
@@ -25,9 +26,7 @@
     for (var key in SENSOR_DATA) {
       var curr_sensor = SENSOR_DATA[key]['Monitor'];
       var curr_date   = new Date(SENSOR_DATA[key]['Date']);
-     //console.log(curr_date.toUTCString())
       var curr_month  = curr_date.getUTCMonth() + 1;
-	    // console.log(curr_month);
       if (curr_sensor == sensor && months.includes(curr_month)) {
         data.push(SENSOR_DATA[key]);
       }
@@ -57,10 +56,12 @@
     CHEMICALS.forEach(chemical => {
       chem_readings[chemical] = []
     })
-
+    // Return an array in which all the averages are the same
+    // if there is no data to parse.
     if (d.length == 0) {
       return Array(4).fill(1);
     }
+    // Split the data by chemicals.
     d.forEach(element => {
       chemical = element['Chemical'];
       reading = element['Reading'];
@@ -82,7 +83,8 @@
   }
   
 
-// Create pie chart
+  // Create the first pie chart. This pie chart will have no
+  // data in it. It will display all chemicals equally.
   function generate_pie_chart(sensor, months) {
     myChart = new Chart(document.getElementById("myChart"), {
       type: 'pie',
@@ -103,19 +105,21 @@
     })
   }
 
-  // Update pie chart
+  // Update pie chart with that matches the sensor and months selected
   function update_pie_chart(chart, sensor, months) {
-    console.log("chart" + chart);
     chart.data.datasets[0].data = get_chemical_avgs(filter_data(sensor, months));
     chart.update();
   }
 
   // Redraw pie chart on change of sensor.
   function redraw() {
+    // Grab all of the values that a user could have changed.
     var sensor = document.getElementById("sensor-num").value;
     var april = document.getElementById("april").checked;
     var august = document.getElementById("august").checked;
     var december = document.getElementById("december").checked;
+
+    // Append only the months that have been checked.
     var months = [];
     if (april) {
       months.push(4);
@@ -126,6 +130,7 @@
     if (december) {
       months.push(12);
     }
+
     update_pie_chart(myChart, sensor, months);
   }
 
@@ -139,7 +144,7 @@
     <input type="checkbox" onclick="redraw()" id="december">December
     </select>
 </div>
-	<script>
+ <script>
    var select = document.getElementById("sensor-num");
    var options = SENSORS;
    SENSORS.forEach (sensor => {
@@ -149,7 +154,7 @@
      select.appendChild(el);
    })
    generate_pie_chart(1, []);
-	</script>
+ </script>
 </body>
 
 </html>
