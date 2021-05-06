@@ -284,6 +284,25 @@
   font-size: 1vw;
 }
 
+.pie-dropdown {
+  display: inline-block;
+  border: none;
+  width: 80%; 
+  position: relative;
+  left: 6%;
+  top: -8px;
+  font-size: 1vw;
+  background-color: #007ee6;
+  padding: 4.5px 10px 4.5px 4.5px;
+  border-radius: 3px;
+  color: #fff;
+  border: none;
+}
+
+.pie-dropdown:hover {
+  background-color: rgba(0,126,230, .7);
+}
+
 .dropdown-check-list .anchor {
   position: relative;
   cursor: pointer;
@@ -725,10 +744,10 @@
       </div>
       
     </div> -->
-    <div class="flexCol2" style="left:18%">
-      <canvas id="pieChart"></canvas>
+    <div class="flexCol2" style="left:15%;">
+      <canvas style="position: relative; top: 10px" id="pieChart"></canvas>
     </div>
-    <div class="flexCol2" style="left: 42%; top: 1%; position: relative;">
+    <div class="flexCol2" style="left: 19%; top: 1%; position: relative;">
       <div style="position: relative; font-size: 1vw; top: 3%; color: black; background-color: rgba(255,255,255, 1);text-align: center; width: 105%; height: 125%; border: 3px solid #00daff; border-radius: 10px;">
         <h2><u>&nbsp Toggle All &nbsp</u></h2>
 
@@ -779,22 +798,41 @@
           </div>
         </div>
         <button id="RUN" class="button button2" onclick="buttonPressed()">Run!</button>
+
         <h4><u>&nbsp Toggle Pie Chart &nbsp</u></h4>
-          <div>
-           <div> 
+        <div style="display: flex; flex-direction: column;">
+          <span class="pie-dropdown">
+            Select Sensor
+            <select id="sensor-num" style="left: 7%; position: relative; border: #fff" onchange="redraw()"></select>
+          </span>
+          <!-- <select id="sensor-num" onchange="redraw()"></select> -->
+
+          <div id="pieDropdown" class="dropdown-check-list" style="margin-top: 5%; z-index: 4">
+            <span class="anchor" style="padding-right: 45px;">Select Months</span>
+            <ul class="items" style="text-align:left">
+              <li><input type="checkbox" onclick="redraw()" id="april">April</li>
+              <li><input type="checkbox" onclick="redraw()" id="august">August</li>
+              <li><input type="checkbox" onclick="redraw()" id="december">December</li>
+            </ul>
+          </div>
+
+        </div>
+          
+          <!-- <div> -->
+           <!-- <div> 
              <span class="anchor">Select Sensor</span>
              <select id="sensor-num" onchange="redraw()"></select>
-           </div>
-       	   <div id="pieDropdown" class="dropdown-check-list" style="margin-top: 5%; z-index: 8">
+           </div> -->
+       	   <!-- <div id="pieDropdown" class="dropdown-check-list" style="margin-top: 5%; z-index: 8">
              <span class="anchor" style="padding-right: 54px;">Select Months</span>
         	   <ul class="items" style="text-align:left">
        	  	   <li><input type="checkbox" onclick="redraw()" id="april">April</li>
            	   <li><input type="checkbox" onclick="redraw()" id="august">August</li>
           	   <li><input type="checkbox" onclick="redraw()" id="december">December</li>
 	      	   </ul>
-           </div>
-          </div>
-        <p>other stuff here</p>
+           </div> -->
+          <!-- </div> -->
+
 
         <h4><u>&nbsp Toggle Bar Graph &nbsp</u></h4>
         
@@ -1052,7 +1090,7 @@
         dataTable[i][j] = dataTable[i][j]/matches[i][j];
       }
     }
-    console.log(dataTable);
+    // console.log(dataTable);
     // console.log(matches);
     return dataTable;
   }
@@ -1116,10 +1154,10 @@
       // updated_color(sensorIntensity[sensor][2], sensorIntensityCount[sensor][2], sensor, 2);
       // updated_color(sensorIntensity[sensor][3], sensorIntensityCount[sensor][3], sensor, 3);
     }
-    console.log("SENSORS: " + sensor_checks);
-    console.log("CHEMICALS: " + chem_checks);
-    console.log("MONTHS: " + month_checks);
-    console.log("WEEKS: " + week_checks);
+    // console.log("SENSORS: " + sensor_checks);
+    // console.log("CHEMICALS: " + chem_checks);
+    // console.log("MONTHS: " + month_checks);
+    // console.log("WEEKS: " + week_checks);
     updated_color(sensor_data_by_chem_time_sensor(sensor_checks, chem_checks, month_checks, week_checks));
   }
 
@@ -1173,6 +1211,7 @@
               document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(0,0,164)";
             }
             else if (j == 3) {
+              // console.log(`triFillS${i}C${j}`)
               document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(164,0,0)";
             }
           }
