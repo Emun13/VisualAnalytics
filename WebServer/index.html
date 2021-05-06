@@ -5,6 +5,8 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script src="./data.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script src="./pie.js"></script>
 
 <style>
   body {
@@ -723,6 +725,9 @@
       </div>
       
     </div> -->
+    <div class="flexCol2" style="left:18%">
+      <canvas id="pieChart"></canvas>
+    </div>
     <div class="flexCol2" style="left: 42%; top: 1%; position: relative;">
       <div style="position: relative; font-size: 1vw; top: 3%; color: black; background-color: rgba(255,255,255, 1);text-align: center; width: 105%; height: 125%; border: 3px solid #00daff; border-radius: 10px;">
         <h2><u>&nbsp Toggle All &nbsp</u></h2>
@@ -775,7 +780,20 @@
         </div>
         <button id="RUN" class="button button2" onclick="buttonPressed()">Run!</button>
         <h4><u>&nbsp Toggle Pie Chart &nbsp</u></h4>
-
+          <div>
+           <div> 
+             <span class="anchor">Select Sensor</span>
+             <select id="sensor-num" onchange="redraw()"></select>
+           </div>
+       	   <div id="pieDropdown" class="dropdown-check-list" style="margin-top: 5%; z-index: 8">
+             <span class="anchor" style="padding-right: 54px;">Select Months</span>
+        	   <ul class="items" style="text-align:left">
+       	  	   <li><input type="checkbox" onclick="redraw()" id="april">April</li>
+           	   <li><input type="checkbox" onclick="redraw()" id="august">August</li>
+          	   <li><input type="checkbox" onclick="redraw()" id="december">December</li>
+	      	   </ul>
+           </div>
+          </div>
         <p>other stuff here</p>
 
         <h4><u>&nbsp Toggle Bar Graph &nbsp</u></h4>
@@ -841,6 +859,13 @@
   }
 
  
+  var pieList = document.getElementById('pieDropdown');
+  pieList.getElementsByClassName('anchor')[0].onclick = function(evt) {
+    if (pieList.classList.contains('visible'))
+      pieList.classList.remove('visible');
+    else
+      pieList.classList.add('visible');
+  }
   /* Given a month & week (Ex. Apr, Aug, Dec, and 0 = W1, 1 = W2, etc..), returns an
    * array where the first value is average wind direction and the second 
    * average is wind speed
@@ -1525,6 +1550,17 @@
       document.getElementById(`triFillS${sensor}C3`).setAttribute('points', '50 50, 60 0, 80 0');
     }
   }
+
+  // Show the pie chart
+  var select = document.getElementById("sensor-num");
+  var options = SENSORS;
+  SENSORS.forEach (sensor => {
+    var el = document.createElement("option");
+    el.textContent = sensor;
+    el.value = sensor;
+    select.appendChild(el);
+  })
+  generate_pie_chart(1, []);
 
 </script>
 
