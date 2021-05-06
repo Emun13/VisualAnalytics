@@ -26,13 +26,14 @@ function filter_data(sensor, months) {
 // that exist with our dataset. This is to avoid
 // hardcoding information.
 var sensor_1 = filter_data(1, [4, 8, 12]);
-const CHEMICALS = new Set()
+var CHEMICALS = new Set()
 var SENSORS   = new Set()
 for (var key in SENSOR_DATA) {
   CHEMICALS.add(SENSOR_DATA[key]['Chemical']);
   SENSORS.add(SENSOR_DATA[key]['Monitor']);
 }
 SENSORS = Array.from(SENSORS).sort();
+CHEMICALS = Array.from(CHEMICALS).sort();
 // This will store our chart for creating and updating.
 var pieChart;
 
