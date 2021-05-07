@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/Emun13/VisualAnalytics#readme",
   "dependencies": {
+    "chartjs-plugin-labels": "^1.1.0",
     "http-server": "^0.12.3"
   }
 }

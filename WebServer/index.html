@@ -303,6 +303,25 @@
   background-color: rgba(0,126,230, .7);
 }
 
+.bargraph-dropdown {
+  display: inline-block;
+  border: none;
+  width: 80%; 
+  position: relative;
+  left: 6%;
+  top: -8px;
+  font-size: 1vw;
+  background-color: #007ee6;
+  padding: 4.5px 10px 4.5px 4.5px;
+  border-radius: 3px;
+  color: #fff;
+  border: none;
+}
+
+.bargraph-dropdown:hover {
+  background-color: rgba(0,126,230, .7);
+}
+
 .dropdown-check-list .anchor {
   position: relative;
   cursor: pointer;
@@ -519,14 +538,14 @@
           50 45 40 35 30 25 20 15 10 5
         </span>
 
-        <span class="triangleGrid" id="RoadrunnerGrid" style="color: #00ef77; left: 71%; bottom: 33.5%">&#9660</span>
+        <span class="triangleGrid" id="RoadrunnerGrid" style="color: #c800ff; left: 71%; bottom: 33.5%; font-size: 1.7vw">&#9660</span>
         <div class="hide" style="left: 69%; bottom: 38.5%">(89,27)</div>
-        <span class="triangleGrid" id="KasiosGrid" style="color: #ffff23; left: 73%; bottom: 21%">&#9660</span>
-        <div class="hide" style="left: 71%; bottom: 26%">(89,27)</div>
-        <span class="triangleGrid" id="RadianceGrid" style="color: #ff3c3c; left: 101%; bottom: 32%">&#9660</span>
-        <div class="hide" style="left: 99%; bottom: 37%">(89,27)</div>
-        <span class="triangleGrid" id="IndigoGrid" style="color: #3c9eff; left: 119%; bottom: 22.5%">&#9660</span>
-        <div class="hide" style="left: 117%; bottom: 27.5%">(89,27)</div>
+        <span class="triangleGrid" id="KasiosGrid" style="color: #ff0000; left: 73%; bottom: 21%; font-size: 1.7vw">&#9660</span>
+        <div class="hide" style="left: 71%; bottom: 26%">(90,21)</div>
+        <span class="triangleGrid" id="RadianceGrid" style="color: #1a00ff; left: 101%; bottom: 32%; font-size: 1.7vw">&#9660</span>
+        <div class="hide" style="left: 99%; bottom: 37%">(109,26)</div>
+        <span class="triangleGrid" id="IndigoGrid" style="color: #00a23a; left: 119%; bottom: 22.5%; font-size: 1.7vw">&#9660</span>
+        <div class="hide" style="left: 117%; bottom: 27.5%">(120,22)</div>
 
         <!-- Sensors -->
         <span class="squareGrid" id="S0" style="left: 36%; bottom: 21%;">1</span>
@@ -537,16 +556,16 @@
             <circle cx="50" cy="50" r="3" style="fill: #fff;"/>
             <!-- non-rotated arrow -->
             <g id="TriS0C0" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS0C0" points="50 50, 40 0, 60 0" style="fill: rgb(0,190,0)">
+              <polygon id="triFillS0C0" points="50 50, 40 0, 60 0" style="fill: rgb(75,192,192)">
             </g>
             <g id="TriS0C1" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS0C1" points="50 50, 40 0, 60 0" style="fill: rgb(190,0,190)">
+              <polygon id="triFillS0C1" points="50 50, 40 0, 60 0" style="fill: rgb(255,206,86)">
             </g>
             <g id="TriS0C2" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS0C2" points="50 50, 40 0, 60 0" style="fill: rgb(0,0,190)">
+              <polygon id="triFillS0C2" points="50 50, 40 0, 60 0" style="fill: rgb(54,162,235)">
             </g>
             <g id="TriS0C3" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS0C3" points="50 50, 40 0, 60 0" style="fill: rgb(190,0,0)">
+              <polygon id="triFillS0C3" points="50 50, 40 0, 60 0" style="fill: rgb(255,99,132)">
             </g>
 
           </svg>
@@ -560,16 +579,16 @@
             <circle cx="50" cy="50" r="3" style="fill: #fff;"/>
             <!-- non-rotated arrow -->
             <g id="TriS1C0" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS1C0" points="50 50, 40 0, 60 0" style="fill: rgb(0,190,0)">
+              <polygon id="triFillS1C0" points="50 50, 40 0, 60 0" style="fill: rgb(75,192,192)">
             </g>
             <g id="TriS1C1" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS1C1" points="50 50, 40 0, 60 0" style="fill: rgb(190,0,190)">
+              <polygon id="triFillS1C1" points="50 50, 40 0, 60 0" style="fill: rgb(255,206,86)">
             </g>
             <g id="TriS1C2" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS1C2" points="50 50, 40 0, 60 0" style="fill: rgb(0,0,190)">
+              <polygon id="triFillS1C2" points="50 50, 40 0, 60 0" style="fill: rgb(54,162,235)">
             </g>
             <g id="TriS1C3" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS1C3" points="50 50, 40 0, 60 0" style="fill: rgb(190,0,0)">
+              <polygon id="triFillS1C3" points="50 50, 40 0, 60 0" style="fill: rgb(255,99,132)">
             </g>
 
           </svg>
@@ -577,88 +596,88 @@
 
         <span class="squareGrid" id="S2" style="left: 55%; bottom: 63%;">3</span>
         <div class="hide" style="left: 53%; bottom: 68%">(76,41)</div>
-        <div style="position: absolute; z-index: -10; left: 42.3%; bottom: 25%">
-          <svg width="20vw" height="20vw" viewBox="-10 0 200 200">
+        <div style="position: absolute; z-index: -10; left: 42.3%; bottom: 28%">
+          <svg width="20vw" height="20vw" viewBox="-10 -15 200 200">
             <!-- center of rotation -->
             <circle cx="50" cy="50" r="3" style="fill: #fff;"/>
             <!-- non-rotated arrow -->
-            <g id="TriS2C0" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS2C0" points="50 50, 40 0, 60 0" style="fill: rgb(0,190,0)">
+            <g id="TriS2C0" style="stroke: #000; display: none;" transform="rotate(0,50,50)">
+              <polygon id="triFillS2C0" points="50 50, 40 0, 60 0" style="fill: rgb(75,192,192)">
             </g>
-            <g id="TriS2C1" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS2C1" points="50 50, 40 0, 60 0" style="fill: rgb(190,0,190)">
+            <g id="TriS2C1" style="stroke: #000; display: none;" transform="rotate(0,50,50)">
+              <polygon id="triFillS2C1" points="50 50, 40 0, 60 0" style="fill: rgb(255,206,86)">
             </g>
-            <g id="TriS2C2" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS2C2" points="50 50, 40 0, 60 0" style="fill: rgb(0,0,190)">
+            <g id="TriS2C2" style="stroke: #000; display: none;" transform="rotate(0,50,50)">
+              <polygon id="triFillS2C2" points="50 50, 40 0, 60 0" style="fill: rgb(54,162,235)">
             </g>
-            <g id="TriS2C3" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS2C3" points="50 50, 40 0, 60 0" style="fill: rgb(190,0,0)">
+            <g id="TriS2C3" style="stroke: #000; display: none;" transform="rotate(0,50,50)">
+              <polygon id="triFillS2C3" points="50 50, 40 0, 60 0" style="fill: rgb(255,99,132)">
             </g>
           </svg>
         </div>
 
         <span class="squareGrid" id="S3" style="left: 71%; bottom: 73%;">4</span>
         <div class="hide" style="left: 68%; bottom: 78%;">(88,45)</div>
-        <div style="position: absolute; z-index: -10; left: 58.5%; bottom: 35%">
-          <svg width="20vw" height="20vw" viewBox="-10 0 200 200">
+        <div style="position: absolute; z-index: -10; left: 58.5%; bottom: 38%">
+          <svg width="20vw" height="20vw" viewBox="-10 -15 200 200">
             <!-- center of rotation -->
             <circle cx="50" cy="50" r="3" style="fill: #fff;"/>
             <!-- non-rotated arrow -->
             <g id="TriS3C0" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS3C0" points="50 50, 40 0, 60 0" style="fill: rgb(0,190,0)">
+              <polygon id="triFillS3C0" points="50 50, 40 0, 60 0" style="fill: rgb(75,192,192)">
             </g>
             <g id="TriS3C1" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS3C1" points="50 50, 40 0, 60 0" style="fill: rgb(190,0,190)">
+              <polygon id="triFillS3C1" points="50 50, 40 0, 60 0" style="fill: rgb(255,206,86)">
             </g>
             <g id="TriS3C2" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS3C2" points="50 50, 40 0, 60 0" style="fill: rgb(0,0,190)">
+              <polygon id="triFillS3C2" points="50 50, 40 0, 60 0" style="fill: rgb(54,162,235)">
             </g>
             <g id="TriS3C3" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS3C3" points="50 50, 40 0, 60 0" style="fill: rgb(190,0,0)">
+              <polygon id="triFillS3C3" points="50 50, 40 0, 60 0" style="fill: rgb(255,99,132)">
             </g>
           </svg>
         </div>
 
         <span class="squareGrid" id="S4" style="left: 91%; bottom: 68%;">5</span>
         <div class="hide" style="left: 89%; bottom: 73%">(103,43)</div>
-        <div style="position: absolute; z-index: -10; left: 80.7%; bottom: 30%">
-          <svg width="20vw" height="20vw" viewBox="0 0 200 200">
+        <div style="position: absolute; z-index: -10; left: 80.7%; bottom: 33%">
+          <svg width="20vw" height="20vw" viewBox="0 -15 200 200">
             <!-- center of rotation -->
             <circle cx="50" cy="50" r="3" style="fill: #fff;"/>
             <!-- non-rotated arrow -->
             <g id="TriS4C0" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS4C0" points="50 50, 40 0, 60 0" style="fill: rgb(0,190,0)">
+              <polygon id="triFillS4C0" points="50 50, 40 0, 60 0" style="fill: rgb(75,192,192)">
             </g>
             <g id="TriS4C1" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS4C1" points="50 50, 40 0, 60 0" style="fill: rgb(190,0,190)">
+              <polygon id="triFillS4C1" points="50 50, 40 0, 60 0" style="fill: rgb(255,206,86)">
             </g>
             <g id="TriS4C2" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS4C2" points="50 50, 40 0, 60 0" style="fill: rgb(0,0,190)">
+              <polygon id="triFillS4C2" points="50 50, 40 0, 60 0" style="fill: rgb(54,162,235)">
             </g>
             <g id="TriS4C3" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS4C3" points="50 50, 40 0, 60 0" style="fill: rgb(190,0,0)">
+              <polygon id="triFillS4C3" points="50 50, 40 0, 60 0" style="fill: rgb(255,99,132)">
             </g>
           </svg>
         </div>
 
         <span class="squareGrid" id="S5" style="left: 88%; bottom: 22.5%;">6</span>
         <div class="hide" style="left: 86%; bottom: 27.5%">(102,22)</div>
-        <div style="position: absolute; z-index: -10; left: 77.7%; bottom: -15.5%">
-          <svg width="20vw" height="20vw" viewBox="-1 0 200 200">
+        <div style="position: absolute; z-index: -10; left: 77.7%; bottom: -12.5%">
+          <svg width="20vw" height="20vw" viewBox="-1 -15 200 200">
             <!-- center of rotation -->
             <circle cx="50" cy="50" r="3" style="fill: #fff;"/>
             <!-- non-rotated arrow -->
             <g id="TriS5C0" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS5C0" points="50 50, 40 0, 60 0" style="fill: rgb(0,190,0)">
+              <polygon id="triFillS5C0" points="50 50, 40 0, 60 0" style="fill: rgb(75,192,192)">
             </g>
             <g id="TriS5C1" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS5C1" points="50 50, 40 0, 60 0" style="fill: rgb(190,0,190)">
+              <polygon id="triFillS5C1" points="50 50, 40 0, 60 0" style="fill: rgb(255,206,86)">
             </g>
             <g id="TriS5C2" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS5C2" points="50 50, 40 0, 60 0" style="fill: rgb(0,0,190)">
+              <polygon id="triFillS5C2" points="50 50, 40 0, 60 0" style="fill: rgb(54,162,235)">
             </g>
             <g id="TriS5C3" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS5C3" points="50 50, 40 0, 60 0" style="fill: rgb(190,0,0)">
+              <polygon id="triFillS5C3" points="50 50, 40 0, 60 0" style="fill: rgb(255,99,132)">
             </g>
           </svg>
         </div>
@@ -671,16 +690,16 @@
             <circle cx="50" cy="50" r="3" style="fill: #fff;"/>
             <!-- non-rotated arrow -->
             <g id="TriS6C0" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS6C0" points="50 50, 40 0, 60 0" style="fill: rgb(0,190,0)">
+              <polygon id="triFillS6C0" points="50 50, 40 0, 60 0" style="fill: rgb(75,192,192)">
             </g>
             <g id="TriS6C1" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS6C1" points="50 50, 40 0, 60 0" style="fill: rgb(190,0,190)">
+              <polygon id="triFillS6C1" points="50 50, 40 0, 60 0" style="fill: rgb(255,206,86)">
             </g>
             <g id="TriS6C2" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS6C2" points="50 50, 40 0, 60 0" style="fill: rgb(0,0,190)">
+              <polygon id="triFillS6C2" points="50 50, 40 0, 60 0" style="fill: rgb(54,162,235)">
             </g>
             <g id="TriS6C3" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS6C3" points="50 50, 40 0, 60 0" style="fill: rgb(190,0,0)">
+              <polygon id="triFillS6C3" points="50 50, 40 0, 60 0" style="fill: rgb(255,99,132)">
             </g>
           </svg>
         </div>
@@ -693,38 +712,38 @@
             <circle cx="50" cy="50" r="3" style="fill: #fff;"/>
             <!-- non-rotated arrow -->
             <g id="TriS7C0" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS7C0" points="50 50, 40 0, 60 0" style="fill: rgb(0,190,0)">
+              <polygon id="triFillS7C0" points="50 50, 40 0, 60 0" style="fill: rgb(75,192,192)">
             </g>
             <g id="TriS7C1" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS7C1" points="50 50, 40 0, 60 0" style="fill: rgb(190,0,190)">
+              <polygon id="triFillS7C1" points="50 50, 40 0, 60 0" style="fill: rgb(255,206,86)">
             </g>
             <g id="TriS7C2" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS7C2" points="50 50, 40 0, 60 0" style="fill: rgb(0,0,190)">
+              <polygon id="triFillS7C2" points="50 50, 40 0, 60 0" style="fill: rgb(54,162,235)">
             </g>
             <g id="TriS7C3" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS7C3" points="50 50, 40 0, 60 0" style="fill: rgb(190,0,0)">
+              <polygon id="triFillS7C3" points="50 50, 40 0, 60 0" style="fill: rgb(255,99,132)">
             </g>
           </svg>
         </div>
 
         <span class="squareGrid" id="S8" style="left: 118%; bottom: 66%;">9</span>
         <div class="hide" style="left: 116%; bottom: 71%">(119,42)</div>
-        <div style="position: absolute; z-index: -10; left: 107.7%; bottom: 28%">
-          <svg width="20vw" height="20vw" viewBox="-1 0 200 200">
+        <div style="position: absolute; z-index: -10; left: 107.7%; bottom: 31%">
+          <svg width="20vw" height="20vw" viewBox="-1 -15 200 200">
             <!-- center of rotation -->
             <circle cx="50" cy="50" r="3" style="fill: #fff;"/>
             <!-- non-rotated arrow -->
             <g id="TriS8C0" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS8C0" points="50 50, 40 0, 60 0" style="fill: rgb(0,190,0)">
+              <polygon id="triFillS8C0" points="50 50, 40 0, 60 0" style="fill: rgb(75,192,192)">
             </g>
             <g id="TriS8C1" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS8C1" points="50 50, 40 0, 60 0" style="fill: rgb(190,0,190)">
+              <polygon id="triFillS8C1" points="50 50, 40 0, 60 0" style="fill: rgb(255,206,86)">
             </g>
             <g id="TriS8C2" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS8C2" points="50 50, 40 0, 60 0" style="fill: rgb(0,0,190)">
+              <polygon id="triFillS8C2" points="50 50, 40 0, 60 0" style="fill: rgb(54,162,235)">
             </g>
             <g id="TriS8C3" style="stroke: #000; display: none" transform="rotate(0,50,50)">
-              <polygon id="triFillS8C3" points="50 50, 40 0, 60 0" style="fill: rgb(190,0,0)">
+              <polygon id="triFillS8C3" points="50 50, 40 0, 60 0" style="fill: rgb(255,99,132)">
             </g>
           </svg>
         </div>
@@ -818,23 +837,24 @@
 
         </div>
           
-          <!-- <div> -->
-           <!-- <div> 
-             <span class="anchor">Select Sensor</span>
-             <select id="sensor-num" onchange="redraw()"></select>
-           </div> -->
-       	   <!-- <div id="pieDropdown" class="dropdown-check-list" style="margin-top: 5%; z-index: 8">
-             <span class="anchor" style="padding-right: 54px;">Select Months</span>
-        	   <ul class="items" style="text-align:left">
-       	  	   <li><input type="checkbox" onclick="redraw()" id="april">April</li>
-           	   <li><input type="checkbox" onclick="redraw()" id="august">August</li>
-          	   <li><input type="checkbox" onclick="redraw()" id="december">December</li>
-	      	   </ul>
-           </div> -->
-          <!-- </div> -->
-
 
         <h4><u>&nbsp Toggle Bar Graph &nbsp</u></h4>
+        <div style="display: flex; flex-direction: column;">
+          <span class="bargraph-dropdown" style="width: 80%; padding-bottom: 10px">
+            Select Chemical
+            <select id="sensor-num1" style="left: 2.5%; position: relative; border: #fff; top: 4px; width: 100%"></select>
+          </span>
+
+          <div id="bargraphDropdown" class="dropdown-check-list" style="margin-top: 5%; z-index: 4">
+            <span class="anchor" style="padding-right: 45px;">Select Months</span>
+            <ul class="items" style="text-align:left">
+              <li><input type="checkbox">April</li>
+              <li><input type="checkbox">August</li>
+              <li><input type="checkbox">December</li>
+            </ul>
+          </div>
+
+        </div>
         
         <p>other stuff here</p>
 
@@ -896,13 +916,20 @@
       sensorList.classList.add('visible');
   }
 
- 
   var pieList = document.getElementById('pieDropdown');
   pieList.getElementsByClassName('anchor')[0].onclick = function(evt) {
     if (pieList.classList.contains('visible'))
       pieList.classList.remove('visible');
     else
       pieList.classList.add('visible');
+  }
+
+  var barList = document.getElementById('bargraphDropdown');
+  barList.getElementsByClassName('anchor')[0].onclick = function(evt) {
+    if (barList.classList.contains('visible'))
+      barList.classList.remove('visible');
+    else
+      barList.classList.add('visible');
   }
   /* Given a month & week (Ex. Apr, Aug, Dec, and 0 = W1, 1 = W2, etc..), returns an
    * array where the first value is average wind direction and the second 
@@ -1048,6 +1075,7 @@
 
     var dataTable = Array(9).fill(0).map(()=>Array(4).fill(0))
     var matches = Array(9).fill(0).map(()=>Array(4).fill(0)) 
+    var tempARR = []
 
     for (var key in SENSOR_DATA) {
       var date = new Date(SENSOR_DATA[key]["Date"]);
@@ -1087,11 +1115,12 @@
 
     for (let i = 0; i < 9; i++) {
       for (let j = 0; j < 4; j++) {
+        tempARR.push(dataTable[i][j]/matches[i][j]);
         dataTable[i][j] = dataTable[i][j]/matches[i][j];
       }
     }
     // console.log(dataTable);
-    // console.log(matches);
+    console.log(tempARR);
     return dataTable;
   }
 
@@ -1165,96 +1194,79 @@
   // 3.6520857567415725 max
   // 0.20622352916666664 min 
   // 0.6979370149255458 avg 
-  function updated_color(table) { //triFillS7C0
-    // if (chemical == 3) {
-    //   console.log("INTENSITY: " + table[i][j] + " SENSOR: " + sensor + " CHEMICAL: " + chemical);
-    //   console.log("I: " + intensity + " C: " + count)
-    // }
-    // if (intensity < 0) {
-    //   if (chemical == 0) {
-    //     document.getElementById(`triFillS${sensor}C${chemical}`).style.fill = "rgb(0,190,0)"
-    //   }
-    //   else if (chemical == 1) {
-    //     document.getElementById(`triFillS${sensor}C${chemical}`).style.fill = "rgb(190,0,190)"
-    //   }
-    //   else if (chemical == 2) {
-    //     document.getElementById(`triFillS${sensor}C${chemical}`).style.fill = "rgb(0,0,190)";
-    //   }
-    //   else if (chemical == 3) {
-    //     document.getElementById(`triFillS${sensor}C${chemical}`).style.fill = "rgb(190,0,0)";
-    //   }
-    // }
+  function updated_color(table) { 
+
     for (let i = 0; i < 9; i++) {
       for (let j = 0; j < 4; j++) {
         if (table[i][j] > 0 && table[i][j] < .21) { // less than min
             if (j == 0) {
-              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(0,139,0)";
+              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(113,205,205)"
             }
             else if (j == 1) {
-              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(139,0,139)";
+              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(255,221,137)";
             }
             else if (j == 2) {
-              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(0,0,139)";
-            } 
+              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(100,183,240)";
+            }
             else if (j == 3) {
-              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(139,0,0)";
+              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(255,150,172)";
             }
           }
           else if (table[i][j] > .21 && table[i][j] < .50) { // between min and .2 less than avg
             if (j == 0) {
-              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(0,164,0)";
+              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(94,199,199)";
             }
             else if (j == 1) {
-              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(164,0,164)";
+              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(255,213,112)";
             }
             else if (j == 2) {
-              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(0,0,164)";
+              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(77,173,237)";
             }
             else if (j == 3) {
-              // console.log(`triFillS${i}C${j}`)
-              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(164,0,0)";
+              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(255,125,152))";
             }
           }
           else if (table[i][j] > .50 && table[i][j] < .90) { // between .2 less than avg and .2 more than avg
             if (j == 0) {
-              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(0,190,0)";
+              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(75,192,192)";
             }
             else if (j == 1) {
-              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(190,0,190)";
+              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(255,206,86)";
             }
             else if (j == 2) {
-              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(0,0,190)";
+              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(54,162,235)";
             }
             else if (j == 3) {
-              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(190,0,0)";
+              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(255,99,132)";
             }
           }
           else if (table[i][j] > .90 && table[i][j] < 1.5) {
             if (j == 0) {
-              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(0,215,0)";
+              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(63,179,179)";
             }
             else if (j == 1) {
-              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(215,0,215)";
+              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(255,199,61)";
             }
             else if (j == 2) {
-              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(0,0,215)";
+              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(31,151,233)";
             }
             else if (j == 3) {
-              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(215,0,0)";
+              // console.log(`triFillS${i}C${j}`)
+              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(255,74,112)";
             }
           } 
           else if (table[i][j] > 1.5) {
             if (j == 0) {
-              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(0,241,0)"
+              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(56,160,160)";
             }
             else if (j == 1) {
-              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(241,0,241)";
+              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(255,191,35)";
             }
             else if (j == 2) {
-              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(0,0,241)";
-            }
+              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(22,138,216)";
+            } 
             else if (j == 3) {
-              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(241,0,0)";
+              document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(255,48,92)";
             }
           }
       }
@@ -1601,6 +1613,14 @@
   })
   generate_pie_chart(1, []);
 
+  var select = document.getElementById("sensor-num1");
+  var options = CHEMICALS;
+  CHEMICALS.forEach (sensor => {
+    var el = document.createElement("option");
+    el.textContent = sensor;
+    el.value = sensor;
+    select.appendChild(el);
+  })
 </script>
 
 
