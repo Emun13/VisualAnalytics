@@ -5,18 +5,30 @@ meteor_cols = Object.keys(METEOR_DATA["0"])
 console.log(sensor_cols);
 
 // Grab all data from a specified sensor.
-function filter_data(sensor, months) {
+function filter_data(sensor, months, weeks) {
   // Return the empty array if no months are specified.
-  if (months.length == 0) {
+  if (months.length == 0 || weeks.length == 0) {
     return [];
   }
   const data = []
+  var week_ranges = []
+  weeks.forEach(week => {
+    week_ranges.push([((week - 1) * 7) + 1, week * 7]);
+  })
   for (var key in SENSOR_DATA) {
     var curr_sensor = SENSOR_DATA[key]['Monitor'];
     var curr_date   = new Date(SENSOR_DATA[key]['Date']);
     var curr_month  = curr_date.getUTCMonth() + 1;
+    var curr_day    = curr_date.getUTCDate();
     if (curr_sensor == sensor && months.includes(curr_month)) {
-      data.push(SENSOR_DATA[key]);
+      for (var x in week_ranges) {
+        var start = week_ranges[x][0];
+        var end   = week_ranges[x][1];
+        if (curr_day >= start && curr_day <= end) {
+          data.push(SENSOR_DATA[key]);
+          break;
+        }
+      }
     }
   }
   return data;
@@ -25,7 +37,7 @@ function filter_data(sensor, months) {
 // Grab all the existing sensors and chemicals
 // that exist with our dataset. This is to avoid
 // hardcoding information.
-var sensor_1 = filter_data(1, [4, 8, 12]);
+var sensor_1 = filter_data(1, [4, 8, 12], [1, 2, 3, 4, 5]);
 var CHEMICALS = new Set()
 var SENSORS   = new Set()
 for (var key in SENSOR_DATA) {
@@ -103,8 +115,8 @@ function generate_pie_chart(sensor, months) {
 }
 
 // Update pie chart with that matches the sensor and months selected
-function update_pie_chart(chart, sensor, months) {
-  chart.data.datasets[0].data = get_chemical_avgs(filter_data(sensor, months));
+function update_pie_chart(chart, sensor, months, weeks) {
+  chart.data.datasets[0].data = get_chemical_avgs(filter_data(sensor, months, weeks));
   chart.update();
 }
 
@@ -115,9 +127,15 @@ function redraw() {
   var april = document.getElementById("april").checked;
   var august = document.getElementById("august").checked;
   var december = document.getElementById("december").checked;
+  var w1 = document.getElementById("W0").checked;
+  var w2 = document.getElementById("W1").checked;
+  var w3 = document.getElementById("W2").checked;
+  var w4 = document.getElementById("W3").checked;
+  var w5 = document.getElementById("W4").checked;
 
   // Append only the months that have been checked.
   var months = [];
+  var weeks = [];
   if (april) {
     months.push(4);
   }
@@ -127,6 +145,12 @@ function redraw() {
   if (december) {
     months.push(12);
   }
+  for (var i = 0; i < 5; i++) {
+    if (document.getElementById(`W${i}`).checked) {
+      weeks.push(i + 1);
+    }
+  }
+  console.log(weeks);
 
-  update_pie_chart(pieChart, sensor, months);
+  update_pie_chart(pieChart, sensor, months, weeks);
 }

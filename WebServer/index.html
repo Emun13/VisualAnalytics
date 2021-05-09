@@ -835,12 +835,19 @@
           </span>
           <!-- <select id="sensor-num" onchange="redraw()"></select> -->
 
-          <div id="pieDropdown" class="dropdown-check-list" style="margin-top: 5%; z-index: 4">
+          <div id="pieDropdown" class="dropdown-check-list" style="margin-top: 5%; z-index: 7">
             <span class="anchor" style="padding-right: 45px;">Select Months</span>
             <ul class="items" style="text-align:left">
+              <li style="text-align: center; position: relative; top: -5px;"><u>&nbsp Months &nbsp</u></li>
               <li><input type="checkbox" onclick="redraw()" id="april">April</li>
               <li><input type="checkbox" onclick="redraw()" id="august">August</li>
               <li><input type="checkbox" onclick="redraw()" id="december">December</li>
+            <li style="text-align: center; position: relative; top: -5px;"><u>&nbsp Weeks &nbsp</u></li>
+              <li><input id="W0" type="checkbox" onclick="redraw()" style="position: relative; top: 2px">W1</li>
+              <li><input id="W1" type="checkbox" onclick="redraw()" style="position: relative; top: 2px">W2</li>
+              <li><input id="W2" type="checkbox" onclick="redraw()" style="position: relative; top: 2px">W3 </li>
+              <li><input id="W3" type="checkbox" onclick="redraw()" style="position: relative; top: 2px">W4</li>
+              <li><input id="W4" type="checkbox" onclick="redraw()" style="position: relative; top: 2px">W5</li>
             </ul>
           </div>
 
@@ -925,6 +932,13 @@
       pieList.classList.add('visible');
   }
 
+  /* var pieWeeksList = document.getElementById('weekDropdown');
+  pieWeeksList.getElementsByClassName('anchor')[0].onclick = function(evt) {
+    if (pieWeeksList.classList.contains('visible'))
+      pieWeeksList.classList.remove('visible');
+    else
+      pieWeeksList.classList.add('visible');
+  }*/
   var barList = document.getElementById('bargraphDropdown');
   barList.getElementsByClassName('anchor')[0].onclick = function(evt) {
     if (barList.classList.contains('visible'))
