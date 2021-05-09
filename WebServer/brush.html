@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+<script src="./data.js"></script>
+<style type="text/css">
+  body {
+    background-color: #000;
+    font-family: Verdana, sans-serif;
+    color: #fff;
+  }
+</style>
+<body>
+
+<canvas id="line-chart" style="width:100%;"></canvas>
+
+<script>
+var LINEGRAPH;
+// takes a chemical and an array of months, returns an array of avg intensities
+function RenderLineDates(sensor) {
+  // var data_BarGraph = Array(9).fill(0);
+  // var matches = Array(9).fill(0);
+  var datesX = [];
+  var AGOC_Y = [];
+  var APP_Y = [];
+  var CHLORO_Y = [];
+  var METH_Y = [];
+  var months = ["Apr", "Aug", "Dec"];
+
+  for (var key in SENSOR_DATA) {
+    var date = new Date(SENSOR_DATA[key]["Date"]);
+    var dateString = date.toUTCString();
+    // deleting everything after 2016
+    var temp = dateString.split('2016')[0] + '2016';
+
+    if (SENSOR_DATA[key]["Monitor"] == sensor) {
+      for (let i = 0; i < 3; i++) {
+        if (dateString.indexOf(months[i]) > 0) {
+          if (SENSOR_DATA[key]["Chemical"] == "AGOC-3A") {
+            AGOC_Y.push(SENSOR_DATA[key]["Reading"]);
+            datesX.push(temp)
+          }
+          if (SENSOR_DATA[key]["Chemical"] == "Appluimonia") {
+            APP_Y.push(SENSOR_DATA[key]["Reading"]);
+          }
+          if (SENSOR_DATA[key]["Chemical"] == "Chlorodinine") {
+            CHLORO_Y.push(SENSOR_DATA[key]["Reading"]);
+          }
+          if (SENSOR_DATA[key]["Chemical"] == "Methylosmolene") {
+            METH_Y.push(SENSOR_DATA[key]["Reading"]);
+          }
+
+        }
+      } 
+    }
+  }
+  //   if (!(datesX.includes(temp))) {
+  //     datesX.push(temp); // only unique days (Apr 7, 8, 9, etc.)
+  //   }
+
+  //   for (let i = 0; i < 3; i++) {
+  //     if (dateString.indexOf(months[i]) > 0) {
+  //       if (SENSOR_DATA[key]["Monitor"] == sensor) {
+  //         if (SENSOR_DATA[key]["Chemical"] == "AGOC-3A") {
+  //           AGOC_Y.push(SENSOR_DATA[key]["Reading"]);
+  //         }
+  //         else if (SENSOR_DATA[key]["Chemical"] == "Appluimonia") {
+  //           APP_Y.push(SENSOR_DATA[key]["Reading"]);
+  //         }
+  //         else if (SENSOR_DATA[key]["Chemical"] == "Chlorodinine") {
+  //           CHLORO_Y.push(SENSOR_DATA[key]["Reading"]);
+  //         } 
+  //         else if (SENSOR_DATA[key]["Chemical"] == "Methylosmolene") {
+  //           METH_Y.push(SENSOR_DATA[key]["Reading"]);
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+  // console.log(datesX.length)
+  console.log(AGOC_Y.length)
+  console.log(APP_Y.length)
+  console.log(CHLORO_Y.length)
+  console.log(METH_Y.length)
+  // LINEGRAPH.data.labels = datesX;
+  // LINEGRAPH.data.datasets[0].data = AGOC_Y; 
+  // LINEGRAPH.data.datasets[1].data = APP_Y; 
+  // LINEGRAPH.data.datasets[2].data = CHLORO_Y; 
+  // LINEGRAPH.data.datasets[3].data = METH_Y; 
+  // LINEGRAPH.update();
+}
+
+LINEGRAPH = new Chart(document.getElementById("line-chart"), {
+  type: 'line',
+  data: {
+    labels: [1500,1600,1700,1750,1800,1850,1900,1950,1999,2050],
+    datasets: [{ 
+        data: [86,114,106,106,107,111,133,221,783,2478],
+        label: "AGOC-3A",
+        borderColor: "#3e95cd",
+        fill: false
+      }, { 
+        data: [282,350,411,502,635,809,947,1402,3700,5267],
+        label: "Appluimonia",
+        borderColor: "#8e5ea2",
+        fill: false
+      }, { 
+        data: [168,170,178,190,203,276,408,547,675,734],
+        label: "Chlorodinine",
+        borderColor: "#3cba9f",
+        fill: false
+      }, { 
+        data: [40,20,10,16,24,38,74,167,508,784],
+        label: "Methylosmolene",
+        borderColor: "#e8c3b9",
+        fill: false
+      }
+    ]
+  },
+  options: {
+    title: {
+      display: true,
+      text: 'Timeline'
+    }
+  }
+});
+
+Chart.defaults.global.defaultFontColor='#fff';
+
+RenderLineDates(1);
+</script>
+
+</body>
+</html>
