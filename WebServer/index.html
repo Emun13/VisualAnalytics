@@ -40,10 +40,10 @@
   }
   .grid {
     width: 131.5%;
-    height: 120%;
+    height: 70%;
     padding-left: 5%;
     position: relative;
-    top: 6%;
+    top: -7%;
   }
   .key {
     position: absolute;
@@ -393,7 +393,21 @@
   display: block;
 }
 
+.container {
+  width: 95%;
+  position: relative;
+  left: 20px;
+  top: -10px;
+  /*margin: 70px auto;*/
+}
+.slider-container {
+  width: 100%;
+  position: relative;
+  left: 1%;
+}
+
 </style>
+<link rel="stylesheet" href="css/rSlider.min.css">
 </head>
 
 <body>
@@ -534,31 +548,31 @@
 
     </div>
   </div>
-
+  <div style="position: relative; width: 100%; height: 50px; background-color: #333"></div>
   <div class="flexbox">
-    <div class="flexCol1" style="left: -1%">
+    <div class="flexCol1" style="left: -1%;">
       <img id="Grid1" class="grid" src="Grid.png" alt="Zoomed in Grid">
       <div style="font-size: 1.2vw;">
-        <span id="Xaxis" style="position: absolute; left: -6%; width: 150%; bottom: -35%; padding-bottom: 5%; word-spacing: .94vw;">
-          0 &nbsp 5 ...//... 60 65 70 75 80 85 90 95 100 105 110 115 120 125
+        <span id="Xaxis" style="position: absolute; left: -6%; width: 150%; bottom: 27%; padding-bottom: 5%; word-spacing: 1.5vw; font-size: 1vw">
+          0&nbsp5 ...//... 60 65 70 75 80 85 90 95 100 105 110 115 120 125
         </span>
-        <span id="Yaxis" style="text-align: center; width: 7%; height: 105%; position: absolute; left: 1.5%; bottom: -19.6%; padding-bottom: 5%;word-spacing: 1vw;line-height: 358%">
+        <span id="Yaxis" style="text-align: center; width: 7%; height: 105%; position: absolute; left: 1.5%; bottom: -5%; padding-bottom: 5%;word-spacing: 1vw;line-height: 250%; font-size: 1vw">
           50 45 40 35 30 25 20 15 10 5
         </span>
-
-        <span class="triangleGrid" id="RoadrunnerGrid" style="color: #c800ff; left: 71%; bottom: 33.5%; font-size: 1.7vw">&#9660</span>
-        <div class="hide" style="left: 69%; bottom: 38.5%">(89,27)</div>
-        <span class="triangleGrid" id="KasiosGrid" style="color: #ff0000; left: 73%; bottom: 21%; font-size: 1.7vw">&#9660</span>
-        <div class="hide" style="left: 71%; bottom: 26%">(90,21)</div>
-        <span class="triangleGrid" id="RadianceGrid" style="color: #1a00ff; left: 101%; bottom: 32%; font-size: 1.7vw">&#9660</span>
-        <div class="hide" style="left: 99%; bottom: 37%">(109,26)</div>
-        <span class="triangleGrid" id="IndigoGrid" style="color: #00a23a; left: 119%; bottom: 22.5%; font-size: 1.7vw">&#9660</span>
-        <div class="hide" style="left: 117%; bottom: 27.5%">(120,22)</div>
+        <!-- 70 66 -->
+        <span class="triangleGrid" id="RoadrunnerGrid" style="color: #c800ff; left: 69.4%; bottom: 70.5%; font-size: 1.7vw">&#9660</span>
+        <div class="hide" style="left: 67.4%; bottom: 75.5%">(89,27)</div>
+        <span class="triangleGrid" id="KasiosGrid" style="color: #ff0000; left: 70.5%; bottom: 63%; font-size: 1.7vw">&#9660</span>
+        <div class="hide" style="left: 68.5%; bottom: 68%">(90,21)</div>
+        <span class="triangleGrid" id="RadianceGrid" style="color: #1a00ff; left: 102%; bottom: 70%; font-size: 1.7vw">&#9660</span>
+        <div class="hide" style="left: 100%; bottom: 75%">(109,26)</div>
+        <span class="triangleGrid" id="IndigoGrid" style="color: #00a23a; left: 120.5%; bottom: 63.8%; font-size: 1.7vw">&#9660</span>
+        <div class="hide" style="left: 118.5%; bottom: 68.8%">(120,22)</div>
 
         <!-- Sensors -->
-        <span class="squareGrid" id="S0" style="left: 36%; bottom: 21%;">1</span>
-        <div class="hide" style="left: 34%; bottom: 26%">(62,21)</div>
-        <div style="position: absolute; z-index: -10; left: 23.5%; bottom: -14.5%">
+        <span class="squareGrid" id="S0" style="left: 31%; bottom: 63%;">1</span>
+        <div class="hide" style="left: 29%; bottom: 68%">(62,21)</div>
+        <div style="position: absolute; z-index: -10; left: 18.5%; bottom: 27.5%">
           <svg width="20vw" height="20vw" viewBox="-10 -10 200 200">
             <!-- center of rotation -->
             <circle cx="50" cy="50" r="3" style="fill: #fff;"/>
@@ -578,10 +592,10 @@
 
           </svg>
         </div>
-        <!-- 8.5 .... 43 -->
-        <span class="squareGrid" id="S1" style="left: 41.5%; bottom: 51%;">2</span>
-        <div class="hide" style="left: 39.5%; bottom: 56%">(66,35)</div>
-        <div style="position: absolute; z-index: -10; left: 29%; bottom: 16%">
+        
+        <span class="squareGrid" id="S1" style="left: 37.5%; bottom: 81%;">2</span>
+        <div class="hide" style="left: 36.5%; bottom: 86%">(66,35)</div>
+        <div style="position: absolute; z-index: -10; left: 25%; bottom: 46%">
           <svg width="20vw" height="20vw" viewBox="-10 -10 200 200">
             <!-- center of rotation -->
             <circle cx="50" cy="50" r="3" style="fill: #fff;"/>
@@ -601,10 +615,10 @@
 
           </svg>
         </div>
-
-        <span class="squareGrid" id="S2" style="left: 55%; bottom: 63%;">3</span>
-        <div class="hide" style="left: 53%; bottom: 68%">(76,41)</div>
-        <div style="position: absolute; z-index: -10; left: 42.3%; bottom: 29%">
+        
+        <span class="squareGrid" id="S2" style="left: 52%; bottom: 89%;">3</span>
+        <div class="hide" style="left: 50%; bottom: 94%">(76,41)</div>
+        <div style="position: absolute; z-index: -10; left: 39.3%; bottom: 55%">
           <svg width="20vw" height="20vw" viewBox="-10 -15 200 200">
             <!-- center of rotation -->
             <circle cx="50" cy="50" r="3" style="fill: #fff;"/>
@@ -623,10 +637,10 @@
             </g>
           </svg>
         </div>
-
-        <span class="squareGrid" id="S3" style="left: 71%; bottom: 73%;">4</span>
-        <div class="hide" style="left: 68%; bottom: 78%;">(88,45)</div>
-        <div style="position: absolute; z-index: -10; left: 58.5%; bottom: 39%">
+        
+        <span class="squareGrid" id="S3" style="left: 70%; bottom: 94%;">4</span>
+        <div class="hide" style="left: 67%; bottom: 99%;">(88,45)</div>
+        <div style="position: absolute; z-index: -10; left: 57.5%; bottom: 60%">
           <svg width="20vw" height="20vw" viewBox="-10 -15 200 200">
             <!-- center of rotation -->
             <circle cx="50" cy="50" r="3" style="fill: #fff;"/>
@@ -645,10 +659,10 @@
             </g>
           </svg>
         </div>
-
-        <span class="squareGrid" id="S4" style="left: 91%; bottom: 68%;">5</span>
-        <div class="hide" style="left: 89%; bottom: 73%">(103,43)</div>
-        <div style="position: absolute; z-index: -10; left: 80.7%; bottom: 34%">
+        
+        <span class="squareGrid" id="S4" style="left: 90%; bottom: 91%;">5</span>
+        <div class="hide" style="left: 88%; bottom: 96%">(103,43)</div>
+        <div style="position: absolute; z-index: -10; left: 79.7%; bottom: 57%">
           <svg width="20vw" height="20vw" viewBox="0 -15 200 200">
             <!-- center of rotation -->
             <circle cx="50" cy="50" r="3" style="fill: #fff;"/>
@@ -667,10 +681,10 @@
             </g>
           </svg>
         </div>
-
-        <span class="squareGrid" id="S5" style="left: 88%; bottom: 22.5%;">6</span>
-        <div class="hide" style="left: 86%; bottom: 27.5%">(102,22)</div>
-        <div style="position: absolute; z-index: -10; left: 77.7%; bottom: -11.5%">
+        
+        <span class="squareGrid" id="S5" style="left: 88%; bottom: 63.5%;">6</span>
+        <div class="hide" style="left: 86%; bottom: 67.5%">(102,22)</div>
+        <div style="position: absolute; z-index: -10; left: 77.7%; bottom: 29.5%">
           <svg width="20vw" height="20vw" viewBox="-1 -15 200 200">
             <!-- center of rotation -->
             <circle cx="50" cy="50" r="3" style="fill: #fff;"/>
@@ -689,10 +703,10 @@
             </g>
           </svg>
         </div>
-
-        <span class="squareGrid" id="S6" style="left: 72%; bottom: -20%;">7</span>
-        <div class="hide" style="left: 70%; bottom: -15%">(89,3)</div>
-        <div style="position: absolute; z-index: -10; left: 61.7%; bottom: -28%">
+        
+        <span class="squareGrid" id="S6" style="left: 70%; bottom: 41%;">7</span>
+        <div class="hide" style="left: 68%; bottom: 45%">(89,3)</div>
+        <div style="position: absolute; z-index: -10; left: 59.7%; bottom: 32%">
           <svg width="20vw" height="20vw" viewBox="-1 -115 200 200">
             <!-- center of rotation -->
             <circle cx="50" cy="50" r="3" style="fill: #fff;"/>
@@ -711,10 +725,10 @@
             </g>
           </svg>
         </div>
-
-        <span class="squareGrid" id="S7" style="left: 52%; bottom: -12%;">8</span>
-        <div class="hide" style="left: 50%; bottom: -7%">(74,7)</div>
-        <div style="position: absolute; z-index: -10; left: 41.7%; bottom: -28%">
+        
+        <span class="squareGrid" id="S7" style="left: 48%; bottom: 44%;">8</span>
+        <div class="hide" style="left: 46%; bottom: 49%">(74,7)</div>
+        <div style="position: absolute; z-index: -10; left: 37.7%; bottom: 28%">
           <svg width="20vw" height="20vw" viewBox="-1 -85 200 200">
             <!-- center of rotation -->
             <circle cx="50" cy="50" r="3" style="fill: #fff;"/>
@@ -733,10 +747,10 @@
             </g>
           </svg>
         </div>
-
-        <span class="squareGrid" id="S8" style="left: 118%; bottom: 66%;">9</span>
-        <div class="hide" style="left: 116%; bottom: 71%">(119,42)</div>
-        <div style="position: absolute; z-index: -10; left: 107.7%; bottom: 32%">
+        
+        <span class="squareGrid" id="S8" style="left: 119%; bottom: 90%;">9</span>
+        <div class="hide" style="left: 117%; bottom: 95%">(119,42)</div>
+        <div style="position: absolute; z-index: -10; left: 108.7%; bottom: 56%">
           <svg width="20vw" height="20vw" viewBox="-1 -15 200 200">
             <!-- center of rotation -->
             <circle cx="50" cy="50" r="3" style="fill: #fff;"/>
@@ -755,7 +769,7 @@
             </g>
           </svg>
         </div>
-        <img style="position: absolute; width: 30%; left: 8%; bottom: -25%; " src="compass.png" alt="Compass">
+        <img style="position: absolute; width: 20%; left: 8%; bottom: 38%; " src="compass.png" alt="Compass">
       </div>
     </div>
 
@@ -772,14 +786,14 @@
       
     </div> -->
     <div class="flexCol2" style="left:17%;">
-      <canvas style="position: relative; top: 10px" id="pieChart"></canvas>
-      <canvas id="BarGraph" style="position: absolute; width:100%; top: 71%; height: 290px"></canvas>
+      <canvas style="position: relative; top: -20px; width: 90%; height: 230px" id="pieChart"></canvas>
+      <canvas id="BarGraph" style="position: absolute; width: 200%; height: 60px; top: 40%; height: 290px"></canvas>
     </div>
-    <div class="flexCol2" style="left: 19%; top: 1%; position: relative;">
-      <div style="position: relative; font-size: 1vw; top: 3%; color: black; background-color: rgba(255,255,255, 1);text-align: center; width: 105%; height: 125%; border: 3px solid #00daff; border-radius: 10px;">
-        <h2><u>&nbsp Toggle All &nbsp</u></h2>
+    <div class="flexCol2" style="left: 21%; top: 0%; position: relative;">
+      <div style="position: relative; font-size: 1vw; top: -3%; color: black; background-color: rgba(255,255,255, 1);text-align: center; width: 105%; height: 125%; border: 3px solid #00daff; border-radius: 10px;">
+        <!-- <h2><u>&nbsp Toggle All &nbsp</u></h2> -->
 
-        <p>other stuff here</p>
+        <!-- <p>other stuff here</p> -->
 
         <h4><u>&nbsp Toggle Grid &nbsp</u></h4>
         <div style="display: flex; flex-direction: column;">
@@ -876,7 +890,15 @@
     </div>
   </div>
 
+<!-- timeline stuff -->
+<canvas id="line-chart" style="width:100%;height: 250px; position: relative; top: -120px"></canvas>
+<div class="container">
+  <div class="slider-container">
+    <input type="text" id="slider" class="slider"/>
+  </div>
+</div>
 
+<script src="js/rSlider.min.js"></script>
 <script>
 
   function toggleMap (toggle, name, count) {
@@ -1683,8 +1705,186 @@ function RenderBarGraph(chemical, month_arr) {
 }
 
 
-</script>
+// time line stuff
+var init = function (dates) {               
+  var slider = new rSlider({
+      target: '#slider',
+      values: dates,
+      range: true,
+      set: [2010, 2013],
+      onChange: function (vals) {
+        console.log(vals);
+      }
+  });
+};        
+// init()
 
+var LINEGRAPH;
+// takes a chemical and an array of months, returns an array of avg intensities
+function RenderLineDates(sensor) {
+  // var data_BarGraph = Array(9).fill(0);
+  // var matches = Array(9).fill(0);
+  var datesX = [];
+  var AGOC_Y = Array(92).fill(0);
+  var APP_Y = Array(92).fill(0);
+  var CHLORO_Y = Array(92).fill(0);
+  var METH_Y = Array(92).fill(0);
+
+  var COUNT_AGOC = Array(92).fill(0);
+  var COUNT_APP = Array(92).fill(0);;
+  var COUNT_CHLORO = Array(92).fill(0);
+  var COUNT_METH = Array(92).fill(0);
+
+
+
+  for (var key in SENSOR_DATA) {
+    var date = new Date(SENSOR_DATA[key]["Date"]);
+    var dateString = date.toUTCString();
+    // deleting everything after 2016
+    var temp = dateString.split('2016')[0];
+
+    if (!(datesX.includes(temp))) {
+      datesX.push(temp); // only unique days (Apr 7, 8, 9, etc.)
+    }
+
+
+
+    if (SENSOR_DATA[key]["Monitor"] == sensor) {
+      if (SENSOR_DATA[key]["Chemical"] == "AGOC-3A") {
+        if (dateString.indexOf("Apr") > 0) {
+          AGOC_Y[date.getUTCDate() - 1] += SENSOR_DATA[key]["Reading"];
+          COUNT_AGOC[date.getUTCDate() - 1] += 1; 
+        }
+        else if (dateString.indexOf("Aug") > 0) {
+          AGOC_Y[date.getUTCDate() - 1 + 30] += SENSOR_DATA[key]["Reading"];
+          COUNT_AGOC[date.getUTCDate() - 1 + 30] += 1; 
+        }
+        else if (dateString.indexOf("Dec") > 0) {
+          AGOC_Y[date.getUTCDate() - 1 + 61] += SENSOR_DATA[key]["Reading"];
+          COUNT_AGOC[date.getUTCDate() - 1 + 61] += 1; 
+        }
+      }
+      if (SENSOR_DATA[key]["Chemical"] == "Appluimonia") {
+        if (dateString.indexOf("Apr") > 0) {
+          APP_Y[date.getUTCDate() - 1] += SENSOR_DATA[key]["Reading"];
+          COUNT_APP[date.getUTCDate() - 1] += 1; 
+        }
+        else if (dateString.indexOf("Aug") > 0) {
+          APP_Y[date.getUTCDate() - 1 + 30] += SENSOR_DATA[key]["Reading"];
+          COUNT_APP[date.getUTCDate() - 1 + 30] += 1; 
+        }
+        else if (dateString.indexOf("Dec") > 0) {
+          APP_Y[date.getUTCDate() - 1 + 61] += SENSOR_DATA[key]["Reading"];
+          COUNT_APP[date.getUTCDate() - 1 + 61] += 1; 
+        }
+      }
+      if (SENSOR_DATA[key]["Chemical"] == "Chlorodinine") {
+        if (dateString.indexOf("Apr") > 0) {
+          CHLORO_Y[date.getUTCDate() - 1] += SENSOR_DATA[key]["Reading"];
+          COUNT_CHLORO[date.getUTCDate() - 1] += 1;  
+        }
+        else if (dateString.indexOf("Aug") > 0) {
+          CHLORO_Y[date.getUTCDate() - 1 + 30] += SENSOR_DATA[key]["Reading"];
+          COUNT_CHLORO[date.getUTCDate() - 1 + 30] += 1; 
+        }
+        else if (dateString.indexOf("Dec") > 0) {
+          CHLORO_Y[date.getUTCDate() - 1 + 61] += SENSOR_DATA[key]["Reading"];
+          COUNT_CHLORO[date.getUTCDate() - 1 + 61] += 1; 
+        }
+      }
+      if (SENSOR_DATA[key]["Chemical"] == "Methylosmolene") {
+        if (dateString.indexOf("Apr") > 0) {
+          METH_Y[date.getUTCDate() - 1] += SENSOR_DATA[key]["Reading"];
+          COUNT_METH[date.getUTCDate() - 1] += 1;  
+        }
+        else if (dateString.indexOf("Aug") > 0) {
+          METH_Y[date.getUTCDate() - 1 + 30] += SENSOR_DATA[key]["Reading"];
+          COUNT_METH[date.getUTCDate() - 1 + 30] += 1; 
+        }
+        else if (dateString.indexOf("Dec") > 0) {
+          METH_Y[date.getUTCDate() - 1 + 61] += SENSOR_DATA[key]["Reading"];
+          COUNT_METH[date.getUTCDate() - 1 + 61] += 1; 
+        }
+      }
+    }
+  }
+  
+  for (let i = 0; i < 92; i++) {
+    AGOC_Y[i] = AGOC_Y[i]/COUNT_AGOC[i];
+    APP_Y[i] = APP_Y[i]/COUNT_APP[i];
+    CHLORO_Y[i] = CHLORO_Y[i]/COUNT_CHLORO[i];
+    METH_Y[i] = METH_Y[i]/COUNT_METH[i];
+  }
+
+  init(datesX)
+
+  LINEGRAPH.data.labels = datesX;
+  LINEGRAPH.data.datasets[0].data = AGOC_Y; 
+  LINEGRAPH.data.datasets[1].data = APP_Y; 
+  LINEGRAPH.data.datasets[2].data = CHLORO_Y; 
+  LINEGRAPH.data.datasets[3].data = METH_Y; 
+  LINEGRAPH.update();
+}
+
+LINEGRAPH = new Chart(document.getElementById("line-chart"), {
+  type: 'line',
+  data: {
+    labels: [],
+    datasets: [{ 
+        data: [],
+        label: "AGOC-3A",
+        borderColor: "rgb(75,192,192)",
+        backgroundColor: "rgb(75,192,192)",
+        fill: false
+      }, { 
+        data: [],
+        label: "Appluimonia",
+        borderColor: "rgb(255,206,86)",
+        backgroundColor: "rgb(255,206,86)",
+        fill: false
+      }, { 
+        data: [],
+        label: "Chlorodinine",
+        borderColor: "rgb(54,162,235)",
+        backgroundColor: "rgb(54,162,235)",
+        fill: false
+      }, { 
+        data: [],
+        label: "Methylosmolene",
+        borderColor: "rgb(255,99,132)",
+        backgroundColor: "rgb(255,99,132)",
+        fill: false
+      }
+    ]
+  },
+  options: {
+    title: {
+      display: false,
+      text: 'Timeline'
+    },
+    scales: {
+      yAxes: [{
+        gridLines: {
+          color: 'rgba(255, 255, 255, .2)', // makes grid lines from y axis red
+          zeroLineColor: '#fff'
+        }
+      }],
+      xAxes: [{
+        gridLines: {
+          color: 'rgba(255, 255, 255, .2)', // makes grid lines from y axis red
+          zeroLineColor: '#fff'
+        },
+        ticks: {
+          fontSize: 10
+        }
+      }]
+    }
+  }
+});
+
+Chart.defaults.global.defaultFontColor='#fff';
+RenderLineDates(3);
+</script>
 
 </body>
 </html>
