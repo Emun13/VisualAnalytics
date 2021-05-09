@@ -103,6 +103,9 @@ function generate_pie_chart(sensor, months) {
       hoverOffset: 4,
     },
     options : {
+      legend: {
+        display: false,
+      },
       plugins: {
         legend : {
           labels : {

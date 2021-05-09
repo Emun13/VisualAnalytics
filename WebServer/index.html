@@ -187,7 +187,7 @@
     padding-left: .6%;
     padding-right: .6%;
     font-size: 1vw;
-    color: #fff
+    color: #fff;
   }
   .squareGrid:hover + .hide {
     display: block;
@@ -213,42 +213,6 @@
     stroke: blue;
     right: 30%;
   }
-
-
-/*.dropbtn {
-  background-color: #007ee6;
-  color: #fff;
-  font-size: 1vw;
-  border: none;
-  width: 80%;
-  border-radius: 3px;
-  cursor: pointer;
-  margin-bottom: 6%;
-  position: relative;
-}
-.dropbtn:hover, .dropbtn:focus {
-  background-color: rgba(0,126,230, .7);
-}
-.dropdown {
-  position: relative;
-  display: inline-block;
-}
-.dropdown-content {
-  display: none;
-  position: absolute;
-  background-color: #f1f1f1;
-  overflow: auto;
-  box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.4);
-  z-index: 1;
-}
-.dropdown-content a {
-  color: #000;
-  padding: 12px 16px;
-  text-decoration: none;
-  display: block;
-}
-.dropdown a:hover {background-color: #ddd;}
-.show {display: block;}*/
 
 .button {
   border: none;
@@ -548,7 +512,7 @@
 
     </div>
   </div>
-  <div style="position: relative; width: 100%; height: 50px; background-color: #333"></div>
+  <div style="position: relative; width: 100%; height: 50px; background-color: rgba(0,0,0,0)"></div>
   <div class="flexbox">
     <div class="flexCol1" style="left: -1%;">
       <img id="Grid1" class="grid" src="Grid.png" alt="Zoomed in Grid">
@@ -560,14 +524,14 @@
           50 45 40 35 30 25 20 15 10 5
         </span>
         <!-- 70 66 -->
-        <span class="triangleGrid" id="RoadrunnerGrid" style="color: #c800ff; left: 69.4%; bottom: 70.5%; font-size: 1.7vw">&#9660</span>
-        <div class="hide" style="left: 67.4%; bottom: 75.5%">(89,27)</div>
-        <span class="triangleGrid" id="KasiosGrid" style="color: #ff0000; left: 70.5%; bottom: 63%; font-size: 1.7vw">&#9660</span>
-        <div class="hide" style="left: 68.5%; bottom: 68%">(90,21)</div>
-        <span class="triangleGrid" id="RadianceGrid" style="color: #1a00ff; left: 102%; bottom: 70%; font-size: 1.7vw">&#9660</span>
-        <div class="hide" style="left: 100%; bottom: 75%">(109,26)</div>
-        <span class="triangleGrid" id="IndigoGrid" style="color: #00a23a; left: 120.5%; bottom: 63.8%; font-size: 1.7vw">&#9660</span>
-        <div class="hide" style="left: 118.5%; bottom: 68.8%">(120,22)</div>
+        <span class="triangleGrid" id="RoadrunnerGrid" style="color: #c800ff; left: 69.4%; bottom: 70.5%; font-size: 1.5vw">&#9660</span>
+        <div class="hide" style="left: 60%; bottom: 75.5%">Roadrunner: (89,27)</div>
+        <span class="triangleGrid" id="KasiosGrid" style="color: #ff0000; left: 70.5%; bottom: 63%; font-size: 1.5vw">&#9660</span>
+        <div class="hide" style="left: 64%; bottom: 68%">Kasios: (90,21)</div>
+        <span class="triangleGrid" id="RadianceGrid" style="color: #1a00ff; left: 102%; bottom: 70%; font-size: 1.5vw">&#9660</span>
+        <div class="hide" style="left: 55%; bottom: 75%; width: 100%">Radiance: (109,26)</div>
+        <span class="triangleGrid" id="IndigoGrid" style="color: #00a23a; left: 120.5%; bottom: 63.8%; font-size: 1.5vw">&#9660</span>
+        <div class="hide" style="left: 73%; bottom: 68.8%; width: 100%">Indigo: (120,22)</div>
 
         <!-- Sensors -->
         <span class="squareGrid" id="S0" style="left: 31%; bottom: 63%;">1</span>
@@ -786,20 +750,20 @@
       
     </div> -->
     <div class="flexCol2" style="left:17%;">
-      <canvas style="position: relative; top: -20px; width: 90%; height: 230px" id="pieChart"></canvas>
-      <canvas id="BarGraph" style="position: absolute; width: 200%; height: 60px; top: 40%; height: 290px"></canvas>
+      <canvas style="position: relative; top: -10px; width: 90%; height: 170px" id="pieChart"></canvas>
+      <canvas id="BarGraph" style="position: absolute; width: 150%; height: 100px; top: 30%; height: 290px"></canvas>
     </div>
     <div class="flexCol2" style="left: 21%; top: 0%; position: relative;">
-      <div style="position: relative; font-size: 1vw; top: -3%; color: black; background-color: rgba(255,255,255, 1);text-align: center; width: 105%; height: 125%; border: 3px solid #00daff; border-radius: 10px;">
+      <div style="position: relative; font-size: 1vw; top: -3%; color: black; background-color: rgba(255,255,255, 1);text-align: center; width: 105%; height: 76%; border: 3px solid #00daff; border-radius: 10px;">
         <!-- <h2><u>&nbsp Toggle All &nbsp</u></h2> -->
 
         <!-- <p>other stuff here</p> -->
 
-        <h4><u>&nbsp Toggle Grid &nbsp</u></h4>
-        <div style="display: flex; flex-direction: column;">
+        <h4 style="position: relative; top: -17px"><u>&nbsp Toggle Grid &nbsp</u></h4>
+        <div style="display: flex; flex-direction: column; position: relative; top: -18px">
 
           <div id="sensorDropdown" class="dropdown-check-list" style="z-index: 10">
-            <span class="anchor" style="padding-right: 42px">Select Sensors</span>
+            <span class="anchor" style="padding-right: 42px;">Select Sensors</span>
             <ul class="items" style="text-align: left; position: absolute;">
               <li><input id="S0_checkbox" type="checkbox" style="position: relative; top: 2px">Sensor 1</li>
               <li><input id="S1_checkbox" type="checkbox" style="position: relative; top: 2px">Sensor 2</li>
@@ -824,7 +788,7 @@
           </div>
 
           <div id="monthDropdown" class="dropdown-check-list" style="margin-top: 5%; z-index: 8">
-            <span class="anchor" style="padding-right: 54px; ">Select Times</span>
+            <span class="anchor" style="padding-right: 54px;">Select Times</span>
             <ul class="items" style="text-align: left">
               <li style="text-align: center; position: relative; top: -5px;"><u>&nbsp Months &nbsp</u></li>
               <li id="M0_text"><input id="M0_checkbox" type="checkbox" style="position: relative; top: 2px">Apr</li>
@@ -839,10 +803,10 @@
             </ul>
           </div>
         </div>
-        <button id="RUN" class="button button2" onclick="buttonPressed()">Run!</button>
+        <button id="RUN" class="button button2" onclick="buttonPressed()" style="position: relative; top: -20px">Run!</button>
 
-        <h4><u>&nbsp Toggle Pie Chart &nbsp</u></h4>
-        <div style="display: flex; flex-direction: column;">
+        <h4 style="position: relative; top: -30px"><u>&nbsp Toggle Pie Chart &nbsp</u></h4>
+        <div style="display: flex; flex-direction: column; position: relative; top: -30px">
           <span class="pie-dropdown">
             Select Sensor
             <select id="sensor-num" style="left: 7%; position: relative; border: #fff" onchange="redraw()"></select>
@@ -868,8 +832,8 @@
         </div>
           
 
-        <h4><u>&nbsp Toggle Bar Graph &nbsp</u></h4>
-        <div style="display: flex; flex-direction: column;">
+        <h4 style="position: relative; top: -45px"><u>&nbsp Toggle Bar Graph &nbsp</u></h4>
+        <div style="display: flex; flex-direction: column; position: relative; top: -45px">
           <select id="chemical-select" class="chem-select" style="left: 10%; position: relative; border: #fff; top: 20px; width: 80%; z-index: 5" onchange="updateBarGraph()"></select>
           <span id="barDropdown" class="bargraph-dropdown" style="padding-bottom: 30px; z-index: 3; top: -25px">
             Select Chemical
@@ -891,8 +855,18 @@
   </div>
 
 <!-- timeline stuff -->
-<canvas id="line-chart" style="width:100%;height: 250px; position: relative; top: -120px"></canvas>
-<div class="container">
+<!-- <span class="pie-dropdown" style="top: -300px">
+  Select Sensor
+  <select id="sensor-select" style="left: 7%; position: relative; border: #fff" onchange="RenderLineDates(3)"></select>
+</span> -->
+<span style="position: relative;top: -180px; font-size: 1vw; left: 280px">
+  Sensor:
+  <select id="sensor-select" style="left: 0%; position: relative; border: #fff; width: 2.5%; height: 15px; z-index: 5" 
+    onchange="RenderLineDates(document.getElementById('sensor-select').value)">  
+  </select>
+</span>
+<canvas id="line-chart" style="width:100%;height: 250px; position: relative; top: -204px"></canvas>
+<div class="container" style="position: relative; top: -210px;">
   <div class="slider-container">
     <input type="text" id="slider" class="slider"/>
   </div>
@@ -917,7 +891,7 @@
 
   $(".scroll").click(function() {
     $('html,body').animate({
-        scrollTop: $("#Yaxis").offset().top},
+        scrollTop: $("#Yaxis").offset().top + 10},
         1200);
   });
 
@@ -1597,6 +1571,14 @@
     selectChemical.appendChild(el);
   })
 
+  var selectSensor = document.getElementById("sensor-select");
+  SENSORS.forEach (sensor => {
+    var el = document.createElement("option");
+    el.textContent = sensor;
+    el.value = sensor;
+    selectSensor.appendChild(el);
+  })
+
 
 
 // console.log(RenderBarGraph("AGOC-3A", [0, 1, 2]))
@@ -1718,7 +1700,7 @@ var init = function (dates) {
   });
 };        
 // init()
-
+var flip = false;
 var LINEGRAPH;
 // takes a chemical and an array of months, returns an array of avg intensities
 function RenderLineDates(sensor) {
@@ -1815,8 +1797,10 @@ function RenderLineDates(sensor) {
     CHLORO_Y[i] = CHLORO_Y[i]/COUNT_CHLORO[i];
     METH_Y[i] = METH_Y[i]/COUNT_METH[i];
   }
-
-  init(datesX)
+  if (flip == false) {
+    init(datesX);
+    flip = true;
+  }
 
   LINEGRAPH.data.labels = datesX;
   LINEGRAPH.data.datasets[0].data = AGOC_Y; 
@@ -1883,7 +1867,7 @@ LINEGRAPH = new Chart(document.getElementById("line-chart"), {
 });
 
 Chart.defaults.global.defaultFontColor='#fff';
-RenderLineDates(3);
+RenderLineDates(1);
 </script>
 
 </body>
