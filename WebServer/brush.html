@@ -43,8 +43,13 @@ var init = function (dates) {
       set: [],
       onChange: function (vals) {
         console.log(vals);
+        console.log(typeof(vals))
+        var re = new RegExp('(.+) ,(.+)');
+        var matches = vals.match(re);
+        console.log(matches[1], matches[2])
       }
   });
+  console.log(slider.getValue().match(re))
 };        
 // init()
 
