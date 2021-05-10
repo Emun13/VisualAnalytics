@@ -14,6 +14,8 @@
     background-color: #000;
     font-family: Verdana, sans-serif;
     color: #fff;
+    height: 1330px;
+    width: 1260px;
   }
   .flexbox {
     display: flex;
@@ -809,17 +811,43 @@
         <div style="display: flex; flex-direction: column; position: relative; top: -30px">
           <span class="pie-dropdown">
             Select Sensor
-            <select id="sensor-num" onchange="redraw_piechart()" style="left: 7%; position: relative; border: #fff" ></select>
+            <select id="sensor-num" style="left: 7%; position: relative; border: #fff" onchange="redraw()"></select>
           </span>
+          <!-- <select id="sensor-num" onchange="redraw()"></select> -->
+
+          <div id="pieDropdown" class="dropdown-check-list" style="margin-top: 5%; z-index: 7">
+            <span class="anchor" style="padding-right: 53px;">Select Times</span>
+            <ul class="items" style="text-align:left">
+              <li style="text-align: center; position: relative; top: -5px;"><u>&nbsp Months &nbsp</u></li>
+              <li><input type="checkbox" onclick="redraw()" id="april">April</li>
+              <li><input type="checkbox" onclick="redraw()" id="august">August</li>
+              <li style="padding-bottom: 12px"><input type="checkbox" onclick="redraw()" id="december">December</li>
+            <li style="text-align: center; position: relative; top: -5px;"><u>&nbsp Weeks &nbsp</u></li>
+              <li><input id="W0" type="checkbox" onclick="redraw()" style="position: relative; top: 2px">W1</li>
+              <li><input id="W1" type="checkbox" onclick="redraw()" style="position: relative; top: 2px">W2</li>
+              <li><input id="W2" type="checkbox" onclick="redraw()" style="position: relative; top: 2px">W3 </li>
+              <li><input id="W3" type="checkbox" onclick="redraw()" style="position: relative; top: 2px">W4</li>
+              <li><input id="W4" type="checkbox" onclick="redraw()" style="position: relative; top: 2px">W5</li>
+            </ul>
+          </div>
+
         </div>
           
 
         <h4 style="position: relative; top: -45px"><u>&nbsp Toggle Bar Graph &nbsp</u></h4>
         <div style="display: flex; flex-direction: column; position: relative; top: -45px">
-          <select id="chemical-select" class="chem-select" style="left: 10%; position: relative; border: #fff; top: 20px; width: 80%; z-index: 5" onchange="updateBar()"></select>
+          <select id="chemical-select" class="chem-select" style="left: 10%; position: relative; border: #fff; top: 20px; width: 80%; z-index: 5" onchange="updateBarGraph()"></select>
           <span id="barDropdown" class="bargraph-dropdown" style="padding-bottom: 30px; z-index: 3; top: -25px">
             Select Chemical
           </span>
+          <div id="bargraphDropdown" class="dropdown-check-list" style="margin-top: -6%; z-index: 4">
+            <span class="anchor" style="padding-right: 44px; left: 1px">Select Months</span>
+            <ul class="items" style="text-align:left">
+              <li><input type="checkbox" onclick="updateBarGraph()" id="BG_April">April</li>
+              <li><input type="checkbox" onclick="updateBarGraph()" id="BG_August">August</li>
+              <li><input type="checkbox" onclick="updateBarGraph()" id="BG_December">December</li>
+            </ul>
+          </div>
 
         </div>
 
@@ -829,17 +857,13 @@
   </div>
 
 <!-- timeline stuff -->
-<!-- <span class="pie-dropdown" style="top: -300px">
-  Select Sensor
-  <select id="sensor-select" style="left: 7%; position: relative; border: #fff" onchange="RenderLineDates(3)"></select>
-</span> -->
-<span style="position: relative;top: -180px; font-size: 1vw; left: 280px">
-  Sensor:
-  <select id="sensor-select" style="left: 0%; position: relative; border: #fff; width: 2.5%; height: 15px; z-index: 5" 
+<span style="position: relative;top: -177px; font-size: 1vw; left: 277px">
+  <b style="background-color: rgba(255,0,106,.9); padding-right: 35px; padding-left: 5px; padding-bottom: 1px">Sensor:</b>
+  <select id="sensor-select" style="top: 1px; left: -3%; position: relative; border: #fff; width: 2.5%; height: 15px; z-index: 5" 
     onchange="RenderLineDates(document.getElementById('sensor-select').value)">  
   </select>
 </span>
-<canvas id="line-chart" style="width:100%;height: 250px; position: relative; top: -204px"></canvas>
+<canvas id="line-chart" style="width:100%;height: 250px; position: relative; top: -200px;"></canvas>
 <div class="container" style="position: relative; top: -210px;">
   <div class="slider-container">
     <input type="text" id="slider" class="slider"/>
@@ -865,7 +889,7 @@
 
   $(".scroll").click(function() {
     $('html,body').animate({
-        scrollTop: $("#Yaxis").offset().top + 10},
+        scrollTop: $("#Yaxis").offset().top - 10}, // Without bookmark bar for google chrome 
         1200);
   });
 
@@ -894,6 +918,28 @@
       sensorList.classList.add('visible');
   }
 
+  var pieList = document.getElementById('pieDropdown');
+  pieList.getElementsByClassName('anchor')[0].onclick = function(evt) {
+    if (pieList.classList.contains('visible'))
+      pieList.classList.remove('visible');
+    else
+      pieList.classList.add('visible');
+  }
+
+  /* var pieWeeksList = document.getElementById('weekDropdown');
+  pieWeeksList.getElementsByClassName('anchor')[0].onclick = function(evt) {
+    if (pieWeeksList.classList.contains('visible'))
+      pieWeeksList.classList.remove('visible');
+    else
+      pieWeeksList.classList.add('visible');
+  }*/
+  var barList = document.getElementById('bargraphDropdown');
+  barList.getElementsByClassName('anchor')[0].onclick = function(evt) {
+    if (barList.classList.contains('visible'))
+      barList.classList.remove('visible');
+    else
+      barList.classList.add('visible');
+  }
   /* Given a month & week (Ex. Apr, Aug, Dec, and 0 = W1, 1 = W2, etc..), returns an
    * array where the first value is average wind direction and the second 
    * average is wind speed
@@ -969,9 +1015,6 @@
    * average sensor reading of the specified criteria
    */  
   function sensor_data_by_chem_time_sensor(sensor_arr, chem_arr, month_arr, week_arr) {
-    var readings = 0;
-    var matches = 0;
-
     var dataTable = Array(9).fill(0).map(()=>Array(4).fill(0))
     var matches = Array(9).fill(0).map(()=>Array(4).fill(0)) 
     var tempARR = []
@@ -1080,7 +1123,7 @@
 
     for (let i = 0; i < 9; i++) {
       for (let j = 0; j < 4; j++) {
-        if (table[i][j] > 0 && table[i][j] < .21) { // less than min
+        if (table[i][j] > 0 && table[i][j] < .18) { // less than min
             if (j == 0) {
               document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(113,205,205)"
             }
@@ -1094,7 +1137,7 @@
               document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(255,150,172)";
             }
           }
-          else if (table[i][j] > .21 && table[i][j] < .50) { // between min and .2 less than avg
+          else if (table[i][j] >= .18 && table[i][j] < .52) { // between min and .2 less than avg
             if (j == 0) {
               document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(94,199,199)";
             }
@@ -1108,7 +1151,7 @@
               document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(255,125,152))";
             }
           }
-          else if (table[i][j] > .50 && table[i][j] < .90) { // between .2 less than avg and .2 more than avg
+          else if (table[i][j] >= .52 && table[i][j] < 1.21) { // between .2 less than avg and .2 more than avg
             if (j == 0) {
               document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(75,192,192)";
             }
@@ -1122,7 +1165,7 @@
               document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(255,99,132)";
             }
           }
-          else if (table[i][j] > .90 && table[i][j] < 1.5) {
+          else if (table[i][j] >= 1.21 && table[i][j] < 2.67) {
             if (j == 0) {
               document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(63,179,179)";
             }
@@ -1137,7 +1180,7 @@
               document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(255,74,112)";
             }
           } 
-          else if (table[i][j] > 1.5) {
+          else if (table[i][j] >= 2.67) {
             if (j == 0) {
               document.getElementById(`triFillS${i}C${j}`).style.fill = "rgb(56,160,160)";
             }
@@ -1494,7 +1537,7 @@
     el.value = sensor;
     select.appendChild(el);
   })
-  generate_pie_chart(1);
+  generate_pie_chart(1, []);
 
 
   var selectChemical = document.getElementById("chemical-select");
@@ -1523,25 +1566,26 @@ var xValues = ["S1", "S2", "S3", "S4", "S5", "S6", "S7", "S8", "S9"];
 var yValues = [10, 10, 10, 10, 10, 10, 10, 10, 10]; // data
 var barColors = "rgb(75,192,192)";
 
-// This is the function that gets called when someone toggles the
-// chemical. It simply grabs the start and end dates from the sliders
-// and sends it off to the updateBarGraph function.
-// NOTE(jhuang09): There's probably a better name and/or better way to do
-// this and/or updateBarGraph may need a name change. Too tired to do so rn :')
-function updateBar() {
-  var re = new RegExp('(.+) ,(.+)');
-  var vals = slider.getValue();
-  var matches = vals.match(re);
-  var start_str = matches[1].concat(" 2016")
-  var end_str = matches[2].concat(" 2016")
-  var start = new Date(start_str)
-  var end   = new Date(end_str) 
-  updateBarGraph(start, end);
-}
-
-function updateBarGraph(start, end) {
+function updateBarGraph() {
   var chemical = document.getElementById("chemical-select").value;
-  RenderBarGraph(chemical, start, end);
+  var april = document.getElementById("BG_April").checked;
+  var august = document.getElementById("BG_August").checked;
+  var december = document.getElementById("BG_December").checked; 
+  var months =  Array(3).fill(-1);
+
+  if (april) {
+    months[0] = 0;
+  }
+  if (august) {
+    months[1] = 1;
+  }
+  if (december) {
+    months[2] = 2;
+  }
+
+  if (months[0] != -1 || months[1] != -1 || months[2] != -1) {
+    RenderBarGraph(chemical, months);
+  }
   // BARGRAPH.data.datasets[0].backgroundColor = 'rgb(255,255,255)';
   // BARGRAPH.update();
 }
@@ -1571,41 +1615,32 @@ BARGRAPH = new Chart("BarGraph", {
 });
 Chart.defaults.global.defaultFontColor='#fff';
 
-// Given a date and a number, it returns the date + days.
-function add_days(date, days) {
-  date.setDate(date.getDate() + days);
-  return date;
-}
-
-// takes a chemical and a start and end date, returns an array of avg intensities
-function RenderBarGraph(chemical, start, end) {
+// takes a chemical and an array of months, returns an array of avg intensities
+function RenderBarGraph(chemical, month_arr) {
   var data_BarGraph = Array(9).fill(0);
   var matches = Array(9).fill(0);
-  var strict_end = add_days(end, 1);
-
-  // utilize the data filtered by start and end dates
-  // to further distinguish the data that matches with
-  // the chemical of interest.
-  filtered_data.forEach(data => {
-    var date = new Date(data["Date"])
-    var dateString = date.toUTCString();
-    if (data["Chemical"] == chemical) {
-      matches[data["Monitor"] - 1] += 1;
-      data_BarGraph[data["Monitor"] - 1] += data["Reading"];
-    }
-  })
-
-/*  for (var key in SENSOR_DATA) {
+  for (var key in SENSOR_DATA) {
     var date = new Date(SENSOR_DATA[key]["Date"]);
     var dateString = date.toUTCString();
-  
+
     if (SENSOR_DATA[key]["Chemical"] == chemical) {
-      if (date >= start && date < end) {
-        matches[SENSOR_DATA[key]["Monitor"] - 1] += 1;
-        data_BarGraph[SENSOR_DATA[key]["Monitor"] - 1] += SENSOR_DATA[key]["Reading"];
-      } 
+      for (let i = 0; i < 3; i++) {
+        if (month_arr[i] == 0) {
+          month_arr[i] = "Apr";
+        } 
+        else if (month_arr[i] == 1) {
+          month_arr[i] = "Aug";
+        }
+        else if (month_arr[i] == 2) {
+          month_arr[i] = "Dec";
+        }
+        if (dateString.indexOf(month_arr[i]) > 0) {
+          matches[SENSOR_DATA[key]["Monitor"] - 1] += 1;
+          data_BarGraph[SENSOR_DATA[key]["Monitor"] - 1] += SENSOR_DATA[key]["Reading"];
+        } 
+      }
     }
-  } */
+  }
   for (let i = 0; i < 9; i++) {
     data_BarGraph[i] = data_BarGraph[i]/matches[i];
   }
@@ -1629,35 +1664,6 @@ function RenderBarGraph(chemical, start, end) {
   // return data_BarGraph;
 }
 
-// Returns the filtered data, given start and end dates.
-// The goal here is to run through the entirety of SENSOR_DATA once
-// and only return the data that is between the start and end dates
-// so that future functions will have a smaller dataset to deal with.
-function filter_data(start, end) {
-  const data = []
-  function add_days(date, days) {
-    date.setDate(date.getDate() + days);
-    return date;
-  }
-  var strict_end = add_days(end, 1);
-  for (var key in SENSOR_DATA) {
-    var curr_sensor = SENSOR_DATA[key]['Monitor'];
-    var curr_date   = new Date(SENSOR_DATA[key]['Date']);
-    var curr_month  = curr_date.getUTCMonth() + 1;
-    var curr_day    = curr_date.getUTCDate();
-    if (curr_date >= start && curr_date < strict_end) {
-        data.push(SENSOR_DATA[key]);
-    }
-  }
-  return data;
-}
-// Initialize our filtered data. The start and end dates will be the 
-// earliest and latest dates of our dataset, respectively.
-var filtered_data = filter_data(new Date(2016, 3, 1), new Date(2016, 11, 31))
-
-// Store the slider as a global variable for other uses such as when we want to
-// toggle using the dropdown menus.
-var slider;
 
 function stringToDate(Datstring) {
   var re = new RegExp('(.+) ,(.+)');
@@ -1673,7 +1679,42 @@ function stringToDate(Datstring) {
   UpdateAll(start.getTime(), end.getTime())
 }
 
+
+function update_direction(start, end) {
+  var windDirection = 0; 
+  var found = 0;
+  for (const key in METEOR_DATA) {
+    var date = new Date(METEOR_DATA[key]["Date"]);
+    if (date.getTime() >= start && date.getTime() < end + 86400000) {
+      found += 1;
+      windDirection += METEOR_DATA[key]["Wind Direction"];
+    }
+  }
+  windDirection = windDirection/found;
+  return windDirection;
+}
+
+
 function UpdateAll(startTime, endTime) {
+  // Grid
+  var sensor_checks = Array(9).fill(-1);
+  var chem_checks = Array(4).fill(-1);
+  var angle = update_direction(startTime, endTime);
+  var gridDataTable = Array(9).fill(0).map(()=>Array(4).fill(0));
+  var gridMatches = Array(9).fill(0).map(()=>Array(4).fill(0)); 
+  // Loop updates wind direction 
+  // Gets values for which check boxes are checked for the grid
+  for (let sensor = 0; sensor < 9; sensor++) {
+    for (let chemical = 0; chemical < 4; chemical++) {
+      if (document.getElementById(`S${sensor}_checkbox`).checked 
+        && document.getElementById(`C${chemical}_checkbox`).checked) {
+        sensor_checks[sensor] = sensor+1; 
+        chem_checks[chemical] = document.getElementById(`C${chemical}_text`).innerText;
+        document.getElementById(`TriS${sensor}C${chemical}`).setAttribute("transform", `rotate(${angle - 180},50,50)`);
+      }
+    }
+  }
+
   // BarGraph
   var data_BarGraph = Array(9).fill(0);
   var bargraph_matches = Array(9).fill(0);
@@ -1682,13 +1723,21 @@ function UpdateAll(startTime, endTime) {
   var sensorPieChart = document.getElementById("sensor-num").value;
   var data_PieChart = Array(4).fill(0);
   var piechart_matches = Array(4).fill(0);
-  // startTime = 1480914000000;
-  // endTime = 1480914000000;
+
+
   for (var key in SENSOR_DATA) {
     var date = new Date(SENSOR_DATA[key]["Date"]);
     // var dateString = date.toUTCString();
 
     if (date.getTime() >= startTime && date.getTime() < endTime + 86400000) { // Adding 1 day to get times until the previous night
+      
+      // grid stuff 
+      if (sensor_checks.includes(SENSOR_DATA[key]["Monitor"])) {
+        if (chem_checks.includes(SENSOR_DATA[key]["Chemical"])) {
+          gridMatches[SENSOR_DATA[key]["Monitor"] - 1][convert(SENSOR_DATA[key]["Chemical"])] += 1; 
+          gridDataTable[SENSOR_DATA[key]["Monitor"] - 1][convert(SENSOR_DATA[key]["Chemical"])] += SENSOR_DATA[key]["Reading"];
+        }
+      }
       // bar graph stuff
       if (SENSOR_DATA[key]["Chemical"] == chemicalBarGraph) {
         bargraph_matches[SENSOR_DATA[key]["Monitor"] - 1] += 1;
@@ -1715,19 +1764,24 @@ function UpdateAll(startTime, endTime) {
       }
     }
   }
-  console.log("bargraph_matches" + " " + bargraph_matches)
-  console.log("readings" + " " + data_BarGraph)
+  // Grid
+  for (let i = 0; i < 9; i++) {
+    for (let j = 0; j < 4; j++) {
+      gridDataTable[i][j] = gridDataTable[i][j]/gridMatches[i][j];
+    }
+  }
+  // BarGraph
   for (let i = 0; i < 9; i++) {
     data_BarGraph[i] = data_BarGraph[i]/bargraph_matches[i];
   }
-
+  // PieChart
   for (let i = 0; i < 4; i++) {
     data_PieChart[i] = data_PieChart[i]/piechart_matches[i]
   }
-  // get help from Janny to do next part after obtaining info
-  pieChart.data.datasets[0].data = data_PieChart;
-  pieChart.update();
 
+  // Update Grid 
+  updated_color(gridDataTable);
+  // Update BarGraph
   if (chemicalBarGraph == "AGOC-3A") {
     BARGRAPH.data.datasets[0].backgroundColor = "rgb(75,192,192)";
   }
@@ -1742,49 +1796,28 @@ function UpdateAll(startTime, endTime) {
   }
   BARGRAPH.data.datasets[0].data = data_BarGraph; 
   BARGRAPH.update()
+  // UpdatePieChart
+  pieChart.data.datasets[0].data = data_PieChart;
+  pieChart.update();
 }
+
+
+
+
+
+
 
 // time line stuff
 var init = function (dates) {               
-  slider = new rSlider({
+  var slider = new rSlider({
       target: '#slider',
       values: dates,
       range: true,
       set: [2010, 2013],
       onChange: function (vals) {
-<<<<<<< HEAD
         console.log(vals);
         stringToDate(vals);
 
-=======
-        // Extract the start and end date strings using a regex.
-        var re = new RegExp('(.+) ,(.+)');
-        var matches = vals.match(re);
-        var start_str = matches[1].concat(" 2016")
-        var end_str = matches[2].concat(" 2016")
-        var start = new Date(start_str)
-        var end   = new Date(end_str)
-        console.log(start)
-
-        // Set our filtered_data so that we have a smaller
-        // dataset to iterate through as we're updating all
-        // graphs within our system. Ideally, the next few
-        // function calls will rely on this variable as the
-        // source.
-        filtered_data = filter_data(start, end) 
-  			
-        // Redraw map
-  			// buttonPressed(start, end);
-
-  			// Redraw bar graph
-  			updateBarGraph(start, end); 
-
-  			// Redraw pie chart
-        var sensor_pie = document.getElementById("sensor-num").value
-  			redraw(start, end, sensor_pie);
-        // alternatively...
-        // redraw_piechart();
->>>>>>> c9093ff603cff3491b07c5482f4350edbf407641
       }
   });
 };        
