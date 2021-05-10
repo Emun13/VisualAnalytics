@@ -124,7 +124,7 @@ function update_pie_chart(chart, sensor, months, weeks) {
 }
 
 // Redraw pie chart on change of sensor.
-function redraw() {
+function redraw(start, end) {
   // Grab all of the values that a user could have changed.
   var sensor = document.getElementById("sensor-num").value;
   var april = document.getElementById("april").checked;
