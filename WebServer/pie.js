@@ -2,33 +2,25 @@
 // Get all the column names for each data set.
 sensor_cols = Object.keys(SENSOR_DATA["0"])
 meteor_cols = Object.keys(METEOR_DATA["0"])
-console.log(sensor_cols);
 
+// TODO(jhuang09): Incorporate filtered_data variable for this
+// function. :)
 // Grab all data from a specified sensor.
-function filter_data(sensor, months, weeks) {
+function filter_datap(sensor, start, end) {
   // Return the empty array if no months are specified.
-  if (months.length == 0 || weeks.length == 0) {
-    return [];
-  }
   const data = []
-  var week_ranges = []
-  weeks.forEach(week => {
-    week_ranges.push([((week - 1) * 7) + 1, week * 7]);
-  })
+  function add_days(date, days) {
+    date.setDate(date.getDate() + days);
+    return date;
+  }
+  var strict_end = add_days(end, 1);
   for (var key in SENSOR_DATA) {
     var curr_sensor = SENSOR_DATA[key]['Monitor'];
     var curr_date   = new Date(SENSOR_DATA[key]['Date']);
     var curr_month  = curr_date.getUTCMonth() + 1;
     var curr_day    = curr_date.getUTCDate();
-    if (curr_sensor == sensor && months.includes(curr_month)) {
-      for (var x in week_ranges) {
-        var start = week_ranges[x][0];
-        var end   = week_ranges[x][1];
-        if (curr_day >= start && curr_day <= end) {
-          data.push(SENSOR_DATA[key]);
-          break;
-        }
-      }
+    if (curr_sensor == sensor && curr_date >= start && curr_date < strict_end) {
+        data.push(SENSOR_DATA[key]);
     }
   }
   return data;
@@ -37,7 +29,7 @@ function filter_data(sensor, months, weeks) {
 // Grab all the existing sensors and chemicals
 // that exist with our dataset. This is to avoid
 // hardcoding information.
-var sensor_1 = filter_data(1, [4, 8, 12], [1, 2, 3, 4, 5]);
+var sensor_1 = filter_datap(1, new Date(2016, 3, 1), new Date(2016, 11, 31));
 var CHEMICALS = new Set()
 var SENSORS   = new Set()
 for (var key in SENSOR_DATA) {
@@ -85,14 +77,14 @@ function get_chemical_avgs(d) {
 
 // Create the first pie chart. This pie chart will have no
 // data in it. It will display all chemicals equally.
-function generate_pie_chart(sensor, months) {
+function generate_pie_chart(sensor) {
   pieChart = new Chart(document.getElementById("pieChart"), {
     type: 'pie',
     data: {
       labels: Array.from(CHEMICALS).sort(),
       datasets: [{
         label: 'Sensor ' + sensor,
-        data: get_chemical_avgs(filter_data(sensor, months)),
+        data: get_chemical_avgs(filter_datap(sensor, new Date(2016, 3, 1), new Date(2016, 11, 31))),
         backgroundColor: [
           'rgb(75,192,192)',
           'rgb(255,206,86)',
@@ -118,42 +110,26 @@ function generate_pie_chart(sensor, months) {
 }
 
 // Update pie chart with that matches the sensor and months selected
-function update_pie_chart(chart, sensor, months, weeks) {
-  chart.data.datasets[0].data = get_chemical_avgs(filter_data(sensor, months, weeks));
+function update_pie_chart(chart, sensor, start, end) {
+  var x = get_chemical_avgs(filter_datap(sensor, start, end));
+  chart.data.datasets[0].data = x; 
   chart.update();
 }
 
 // Redraw pie chart on change of sensor.
-function redraw(start, end) {
-  // Grab all of the values that a user could have changed.
-  var sensor = document.getElementById("sensor-num").value;
-  var april = document.getElementById("april").checked;
-  var august = document.getElementById("august").checked;
-  var december = document.getElementById("december").checked;
-  var w1 = document.getElementById("W0").checked;
-  var w2 = document.getElementById("W1").checked;
-  var w3 = document.getElementById("W2").checked;
-  var w4 = document.getElementById("W3").checked;
-  var w5 = document.getElementById("W4").checked;
-
-  // Append only the months that have been checked.
-  var months = [];
-  var weeks = [];
-  if (april) {
-    months.push(4);
-  }
-  if (august) {
-    months.push(8);
-  }
-  if (december) {
-    months.push(12);
-  }
-  for (var i = 0; i < 5; i++) {
-    if (document.getElementById(`W${i}`).checked) {
-      weeks.push(i + 1);
-    }
-  }
-  console.log(weeks);
-
-  update_pie_chart(pieChart, sensor, months, weeks);
+function redraw(start, end, sensor) {
+  update_pie_chart(pieChart, sensor, start, end);
 }
+
+function redraw_piechart() {
+  var sensor = document.getElementById("sensor-num").value;
+  var re = new RegExp('(.+) ,(.+)');
+  var vals = slider.getValue();
+  var matches = vals.match(re);
+  var start_str = matches[1].concat(" 2016")
+  var end_str = matches[2].concat(" 2016")
+  var start = new Date(start_str)
+  var end   = new Date(end_str)
+  redraw(start, end, sensor)
+}
+
