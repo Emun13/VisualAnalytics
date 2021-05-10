@@ -1067,7 +1067,7 @@
       }
     }
     // console.log(dataTable);
-    console.log(tempARR);
+    // console.log(tempARR);
     return dataTable;
   }
 
@@ -1081,13 +1081,6 @@
     var chem_checks = Array(4).fill(-1);
     var month_checks = Array(3).fill(-1);
     var week_checks = Array(5).fill(-1);
-
-    // const m = 9; // sensors
-    // const n = 4; // chemicals 
-    // var sensorIntensity = Array(9).fill(null).map(()=>Array(4).fill(0))
-    // var sensorIntensityCount = Array(9).fill(null).map(()=>Array(4).fill(0))
-
-    // var sensorIntensity = new Array(9); // 9 sensors
 
     WindDirections._PushAndRejectDuplicate = function(el) {
       if (this.indexOf(el) == -1) this.push(el)
@@ -1123,17 +1116,7 @@
           }
         }
       }
-
-
-      // updated_color(sensorIntensity[sensor][0], sensorIntensityCount[sensor][0], sensor, 0);
-      // updated_color(sensorIntensity[sensor][1], sensorIntensityCount[sensor][1], sensor, 1);
-      // updated_color(sensorIntensity[sensor][2], sensorIntensityCount[sensor][2], sensor, 2);
-      // updated_color(sensorIntensity[sensor][3], sensorIntensityCount[sensor][3], sensor, 3);
     }
-    // console.log("SENSORS: " + sensor_checks);
-    // console.log("CHEMICALS: " + chem_checks);
-    // console.log("MONTHS: " + month_checks);
-    // console.log("WEEKS: " + week_checks);
     updated_color(sensor_data_by_chem_time_sensor(sensor_checks, chem_checks, month_checks, week_checks));
   }
 
@@ -1687,6 +1670,91 @@ function RenderBarGraph(chemical, month_arr) {
 }
 
 
+function stringToDate(Datstring) {
+  var re = new RegExp('(.+) ,(.+)');
+  var matches = Datstring.match(re);
+  var start_str = matches[1].concat(" 2016 00:00:00 GMT");
+  var end_str = matches[2].concat(" 2016 00:00:00 GMT");
+  var start = new Date(start_str);
+  var end = new Date(end_str);
+  // console.log(start);
+  // console.log(start.getTime())
+  // console.log(end);
+  // console.log(end.getTime())
+  UpdateAll(start.getTime(), end.getTime())
+}
+
+function UpdateAll(startTime, endTime) {
+  // BarGraph
+  var data_BarGraph = Array(9).fill(0);
+  var bargraph_matches = Array(9).fill(0);
+  var chemicalBarGraph = document.getElementById("chemical-select").value;
+  // PieChart
+  var sensorPieChart = document.getElementById("sensor-num").value;
+  var data_PieChart = Array(4).fill(0);
+  var piechart_matches = Array(4).fill(0);
+  // startTime = 1480914000000;
+  // endTime = 1480914000000;
+  for (var key in SENSOR_DATA) {
+    var date = new Date(SENSOR_DATA[key]["Date"]);
+    // var dateString = date.toUTCString();
+
+    if (date.getTime() >= startTime && date.getTime() < endTime + 86400000) { // Adding 1 day to get times until the previous night
+      // bar graph stuff
+      if (SENSOR_DATA[key]["Chemical"] == chemicalBarGraph) {
+        bargraph_matches[SENSOR_DATA[key]["Monitor"] - 1] += 1;
+        data_BarGraph[SENSOR_DATA[key]["Monitor"] - 1] += SENSOR_DATA[key]["Reading"];
+      }
+      // pie chart stuff
+      if (SENSOR_DATA[key]["Monitor"] == sensorPieChart) {
+        if (SENSOR_DATA[key]["Chemical"] == "AGOC-3A") {
+          piechart_matches[0] += 1;
+          data_PieChart[0] += SENSOR_DATA[key]["Reading"];
+        }
+        else if (SENSOR_DATA[key]["Chemical"] == "Appluimonia") {
+          piechart_matches[1] += 1;
+          data_PieChart[1] += SENSOR_DATA[key]["Reading"];
+        }
+        else if (SENSOR_DATA[key]["Chemical"] == "Chlorodinine") {
+          piechart_matches[2] += 1;
+          data_PieChart[2] += SENSOR_DATA[key]["Reading"];
+        }
+        else if (SENSOR_DATA[key]["Chemical"] == "Methylosmolene") {
+          piechart_matches[3] += 1;
+          data_PieChart[3] += SENSOR_DATA[key]["Reading"];
+        }
+      }
+    }
+  }
+  console.log("bargraph_matches" + " " + bargraph_matches)
+  console.log("readings" + " " + data_BarGraph)
+  for (let i = 0; i < 9; i++) {
+    data_BarGraph[i] = data_BarGraph[i]/bargraph_matches[i];
+  }
+
+  for (let i = 0; i < 4; i++) {
+    data_PieChart[i] = data_PieChart[i]/piechart_matches[i]
+  }
+  // get help from Janny to do next part after obtaining info
+  pieChart.data.datasets[0].data = data_PieChart;
+  pieChart.update();
+
+  if (chemicalBarGraph == "AGOC-3A") {
+    BARGRAPH.data.datasets[0].backgroundColor = "rgb(75,192,192)";
+  }
+  else if (chemicalBarGraph == "Appluimonia") {
+    BARGRAPH.data.datasets[0].backgroundColor = 'rgb(255,206,86)';
+  }
+  else if (chemicalBarGraph == "Chlorodinine") {
+    BARGRAPH.data.datasets[0].backgroundColor = 'rgb(54,162,235)';
+  }
+  else if (chemicalBarGraph == "Methylosmolene") {
+    BARGRAPH.data.datasets[0].backgroundColor = 'rgb(255,99,132)';
+  }
+  BARGRAPH.data.datasets[0].data = data_BarGraph; 
+  BARGRAPH.update()
+}
+
 // time line stuff
 var init = function (dates) {               
   var slider = new rSlider({
@@ -1696,6 +1764,8 @@ var init = function (dates) {
       set: [2010, 2013],
       onChange: function (vals) {
         console.log(vals);
+        stringToDate(vals);
+
       }
   });
 };        
